@@ -1,0 +1,34 @@
+# depslib dependency file v1.0
+1544636789 source:c:\users\user\desktop\computerprograming\sdlgame\show_image\main.cpp
+	<SDL.h>
+	<SDL_image.h>
+	<stdio.h>
+	<string>
+	<LTexture.h>
+	<LButton.h>
+
+1544626498 source:c:\users\user\desktop\computerprograming\sdlgame\07_texture_loading_and_rendering\07_texture_loading_and_rendering.cpp
+	<SDL.h>
+	<SDL_image.h>
+	<stdio.h>
+	<string>
+
+1544630063 c:\users\user\desktop\computerprograming\sdlgame\show_image\include\ltexture.h
+	<SDL.h>
+	<SDL_image.h>
+	<stdio.h>
+	<string>
+
+1544630031 c:\users\user\desktop\computerprograming\sdlgame\show_image\include\lbutton.h
+	<SDL.h>
+	<SDL_image.h>
+	<stdio.h>
+	<string>
+
+1544632047 source:c:\users\user\desktop\computerprograming\sdlgame\show_image\src\lbutton.cpp
+	"LButton.h"
+	"LTexture.h"
+
+1544631850 source:c:\users\user\desktop\computerprograming\sdlgame\show_image\src\ltexture.cpp
+	"LTexture.h"
+
