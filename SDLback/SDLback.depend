@@ -1,7 +1,0 @@
-# depslib dependency file v1.0
-1544606873 source:c:\users\user\desktop\computerprograming\codeblocks\sdlback\main.cpp
-	<SDL2/SDL.h>
-	<SDL_image.h>
-	<stdio.h>
-	<string>
-

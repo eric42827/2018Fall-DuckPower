@@ -1,7 +1,0 @@
-# depslib dependency file v1.0
-1544620391 source:c:\users\user\downloads\17_mouse_events\17_mouse_events\17_mouse\main.cpp
-	<SDL2/SDL.h>
-	<SDL_image.h>
-	<stdio.h>
-	<string>
-
