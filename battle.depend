@@ -1,0 +1,275 @@
+# depslib dependency file v1.0
+1544696968 source:c:\users\user\desktop\battlefield - bigger\code\main.cpp
+	<SDL2/SDL.h>
+	<SDL_image.h>
+	<stdio.h>
+	<string>
+	<cmath>
+	<loop.h>
+	<LTexture.h>
+	<LButton.h>
+	<soldier_short.h>
+
+1543746997 c:\program files (x86)\sdl2\i686-w64-mingw32\include\sdl2\sdl_image.h
+	"SDL2/SDL.h"
+	"SDL2/SDL_version.h"
+	"SDL2/begin_code.h"
+	"SDL2/close_code.h"
+
+1544632137 c:\users\user\desktop\battlefield - bigger\code\include\loop.h
+
+1544630277 c:\users\user\desktop\battlefield - bigger\code\include\ltexture.h
+	<SDL2/SDL.h>
+	<SDL_image.h>
+	<stdio.h>
+	<string>
+	<cmath>
+
+1544632362 c:\users\user\desktop\battlefield - bigger\code\include\lbutton.h
+	<SDL2/SDL.h>
+	<SDL_image.h>
+	<stdio.h>
+	<string>
+	<cmath>
+
+1544628308 c:\users\user\desktop\battlefield - bigger\code\include\soldier_short.h
+
+1544631159 source:c:\users\user\desktop\battlefield - bigger\code\src\lbutton.cpp
+	"LButton.h"
+
+1544628088 source:c:\users\user\desktop\battlefield - bigger\code\src\loop.cpp
+	"loop.h"
+
+1544630277 source:c:\users\user\desktop\battlefield - bigger\code\src\ltexture.cpp
+	"LTexture.h"
+
+1544628269 source:c:\users\user\desktop\battlefield - bigger\code\src\soldier_short.cpp
+	"soldier_short.h"
+
+1544972716 source:c:\users\user\desktop\save\battlefield - bigger\code\main.cpp
+	<SDL2/SDL.h>
+	<SDL_image.h>
+	<stdio.h>
+	<string>
+	<cmath>
+	<loop.h>
+	<LTexture.h>
+	<LButton.h>
+	<soldier_short.h>
+	<base.h>
+
+1544918964 c:\users\user\desktop\save\battlefield - bigger\code\include\loop.h
+	<SDL2/SDL.h>
+	<SDL_image.h>
+	<LButton.h>
+	<LTexture.h>
+	<base.h>
+
+1544910850 c:\users\user\desktop\save\battlefield - bigger\code\include\lbutton.h
+	<SDL2/SDL.h>
+	<SDL_image.h>
+	<stdio.h>
+	<string>
+	<cmath>
+
+1544916808 c:\users\user\desktop\save\battlefield - bigger\code\include\ltexture.h
+	<SDL2/SDL.h>
+	<SDL_image.h>
+	<stdio.h>
+	<string>
+	<cmath>
+
+1544732224 c:\users\user\desktop\save\battlefield - bigger\code\include\base.h
+
+1544974370 c:\users\user\desktop\save\battlefield - bigger\code\include\soldier_short.h
+	<stdio.h>
+	<SDL2/SDL.h>
+	<SDL_image.h>
+	<LButton.h>
+	<LTexture.h>
+	<base.h>
+
+1544716612 source:c:\users\user\desktop\save\battlefield - bigger\code\src\base.cpp
+	"base.h"
+
+1544631159 source:c:\users\user\desktop\save\battlefield - bigger\code\src\lbutton.cpp
+	"LButton.h"
+
+1544628088 source:c:\users\user\desktop\save\battlefield - bigger\code\src\loop.cpp
+	"loop.h"
+
+1544630277 source:c:\users\user\desktop\save\battlefield - bigger\code\src\ltexture.cpp
+	"LTexture.h"
+
+1544965937 source:c:\users\user\desktop\save\battlefield - bigger\code\src\soldier_short.cpp
+	"soldier_short.h"
+
+1544716612 source:c:\users\user\desktop\test\battlefield - bigger\code\src\base.cpp
+	"base.h"
+
+1545160162 c:\users\user\desktop\test\battlefield - bigger\code\include\base.h
+
+1545191543 source:c:\users\user\desktop\test\battlefield - bigger\code\src\battle_scene.cpp
+	"BATTLE_SCENE.h"
+
+1545195003 c:\users\user\desktop\test\battlefield - bigger\code\include\battle_scene.h
+	<SDL2/SDL.h>
+	<SDL_image.h>
+	<stdio.h>
+	<string>
+	<cmath>
+	<loop.h>
+	<LTexture.h>
+	<LButton.h>
+	<soldier_short.h>
+	<base.h>
+
+1545160162 c:\users\user\desktop\test\battlefield - bigger\code\include\loop.h
+	<SDL2/SDL.h>
+	<SDL_image.h>
+	<LButton.h>
+	<LTexture.h>
+	<base.h>
+
+1544910850 c:\users\user\desktop\test\battlefield - bigger\code\include\lbutton.h
+	<SDL2/SDL.h>
+	<SDL_image.h>
+	<stdio.h>
+	<string>
+	<cmath>
+
+1545161507 c:\users\user\desktop\test\battlefield - bigger\code\include\ltexture.h
+	<SDL2/SDL.h>
+	<SDL_image.h>
+	<stdio.h>
+	<string>
+	<cmath>
+
+1545160162 c:\users\user\desktop\test\battlefield - bigger\code\include\soldier_short.h
+	<stdio.h>
+	<SDL2/SDL.h>
+	<SDL_image.h>
+	<LButton.h>
+	<LTexture.h>
+	<base.h>
+
+1544631159 source:c:\users\user\desktop\test\battlefield - bigger\code\src\lbutton.cpp
+	"LButton.h"
+
+1544628088 source:c:\users\user\desktop\test\battlefield - bigger\code\src\loop.cpp
+	"loop.h"
+
+1545188757 source:c:\users\user\desktop\test\battlefield - bigger\code\src\ltexture.cpp
+	"LTexture.h"
+
+1545112861 source:c:\users\user\desktop\test\battlefield - bigger\code\src\soldier_short.cpp
+	"soldier_short.h"
+
+1545195064 source:c:\users\user\desktop\test\battlefield - bigger\code\main.cpp
+	<SDL2/SDL.h>
+	<SDL_image.h>
+	<stdio.h>
+	<ostream>
+	<string>
+	<cmath>
+	<loop.h>
+	<LTexture.h>
+	<LButton.h>
+	<soldier_short.h>
+	<base.h>
+	<BATTLE_SCENE.h>
+
+1545160169 c:\users\user\desktop\test\battlefield - bigger\code\include\tess.h
+	<SDL2/SDL.h>
+	<SDL_image.h>
+	<stdio.h>
+	<string>
+	<cmath>
+	<loop.h>
+	<LTexture.h>
+	<LButton.h>
+	<soldier_short.h>
+	<base.h>
+
+1545159277 source:c:\users\user\desktop\test\battlefield - bigger\code\src\tess.cpp
+	"tess.h"
+
+1544716612 source:c:\users\user\desktop\new_map\battlefield - bigger\code\src\base.cpp
+	"base.h"
+
+1545160162 c:\users\user\desktop\new_map\battlefield - bigger\code\include\base.h
+
+1545205580 source:c:\users\user\desktop\new_map\battlefield - bigger\code\src\battle_scene.cpp
+	"BATTLE_SCENE.h"
+
+1545489236 c:\users\user\desktop\new_map\battlefield - bigger\code\include\battle_scene.h
+	<iostream>
+	<SDL2/SDL.h>
+	<SDL_image.h>
+	<stdio.h>
+	<string.h>
+	<cmath>
+	<loop.h>
+	<LTexture.h>
+	<LButton.h>
+	<soldier_short.h>
+	<base.h>
+	<fstream>
+	<sstream>
+	<stdlib.h>
+
+1545160162 c:\users\user\desktop\new_map\battlefield - bigger\code\include\loop.h
+	<SDL2/SDL.h>
+	<SDL_image.h>
+	<LButton.h>
+	<LTexture.h>
+	<base.h>
+
+1544910850 c:\users\user\desktop\new_map\battlefield - bigger\code\include\lbutton.h
+	<SDL2/SDL.h>
+	<SDL_image.h>
+	<stdio.h>
+	<string>
+	<cmath>
+
+1545161507 c:\users\user\desktop\new_map\battlefield - bigger\code\include\ltexture.h
+	<SDL2/SDL.h>
+	<SDL_image.h>
+	<stdio.h>
+	<string>
+	<cmath>
+
+1545489154 c:\users\user\desktop\new_map\battlefield - bigger\code\include\soldier_short.h
+	<stdio.h>
+	<SDL2/SDL.h>
+	<SDL_image.h>
+	<LButton.h>
+	<LTexture.h>
+	<base.h>
+
+1544631159 source:c:\users\user\desktop\new_map\battlefield - bigger\code\src\lbutton.cpp
+	"LButton.h"
+
+1544628088 source:c:\users\user\desktop\new_map\battlefield - bigger\code\src\loop.cpp
+	"loop.h"
+
+1545188757 source:c:\users\user\desktop\new_map\battlefield - bigger\code\src\ltexture.cpp
+	"LTexture.h"
+
+1545112861 source:c:\users\user\desktop\new_map\battlefield - bigger\code\src\soldier_short.cpp
+	"soldier_short.h"
+
+1545307714 source:c:\users\user\desktop\new_map\battlefield - bigger\code\main.cpp
+	<SDL2/SDL.h>
+	<SDL_image.h>
+	<stdio.h>
+	<ostream>
+	<string>
+	<cmath>
+	<loop.h>
+	<LTexture.h>
+	<LButton.h>
+	<soldier_short.h>
+	<base.h>
+	<BATTLE_SCENE.h>
+

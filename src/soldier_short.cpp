@@ -7,5 +7,7 @@ soldier_short::soldier_short()
 
 soldier_short::~soldier_short()
 {
-    //dtor
+
+        //printf("DESTRUCT%d",id);
+
 }

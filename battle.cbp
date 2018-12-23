@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="Lazyfoo14" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/Lazyfoo14" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+					<Add directory="include" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/Lazyfoo14" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add directory="include" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-fexceptions" />
+			<Add directory="C:/Program Files (x86)/SDL2/i686-w64-mingw32/include/SDL2" />
+		</Compiler>
+		<Linker>
+			<Add option="-lmingw32 -lSDL2main -lSDL2 -lSDL2_image" />
+			<Add directory="C:/Program Files (x86)/SDL2/i686-w64-mingw32/lib" />
+		</Linker>
+		<Unit filename="include/BATTLE_SCENE.h" />
+		<Unit filename="include/LButton.h" />
+		<Unit filename="include/LTexture.h" />
+		<Unit filename="include/base.h" />
+		<Unit filename="include/loop.h" />
+		<Unit filename="include/soldier_short.h" />
+		<Unit filename="main.cpp" />
+		<Unit filename="src/BATTLE_SCENE.cpp" />
+		<Unit filename="src/LButton.cpp" />
+		<Unit filename="src/LTexture.cpp" />
+		<Unit filename="src/base.cpp" />
+		<Unit filename="src/loop.cpp" />
+		<Unit filename="src/soldier_short.cpp" />
+		<Unit filename="src/tess.cpp" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

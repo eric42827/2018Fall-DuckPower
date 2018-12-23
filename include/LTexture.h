@@ -1,6 +1,6 @@
 #ifndef LTEXTURE_H
 #define LTEXTURE_H
-#include<iostream>
+
 #include <SDL2/SDL.h>
 #include <SDL_image.h>
 #include <stdio.h>
@@ -12,13 +12,10 @@ extern SDL_Renderer* gRenderer ;
 class LTexture
 {
     public:
-        int x0,y0;
         LTexture();
+        LTexture(std::string path);
         virtual ~LTexture();
         //Loads image at specified path
-        		//Image dimensions
-        int mWidth;
-		int mHeight;
 		bool loadFromFile( std::string path )
 		{
         //Get rid of preexisting texture
@@ -94,36 +91,47 @@ class LTexture
         }
 
 		//Renders texture at given point
-		/************зя************/
-		void render( int x, int y,double a=1.0,double b=1.0)
+		void render( int x, int y )
         {
             //Set rendering space and render to screen
-            SDL_Rect renderQuad = { x, y, mWidth*a, mHeight*b};
-            a0=a;b0=b;x=x0;y=y0;
-            //std::cout<<mWidth*a0<<" ";
-            //std::cout<<mHeight*b0;
+            SDL_Rect renderQuad = { x, y, mWidth, mHeight };
+
+
             //Render to screen
             SDL_RenderCopy( gRenderer, mTexture, NULL, &renderQuad );
         }
+        void render( int x, int y, SDL_Rect* clip )
+        {
+        //Set rendering space and render to screen
+        SDL_Rect renderQuad = { x, y, mWidth, mHeight };
+
+        //Set clip rendering dimensions
+        if( clip != NULL )
+        {
+            renderQuad.w = clip->w;
+            renderQuad.h = clip->h;
+        }
+
+        //Render to screen
+        SDL_RenderCopy( gRenderer, mTexture, clip, &renderQuad );
+        }
 		//Gets image dimensions
 		int getWidth(){
-            return mWidth*a0;
-            //std::cout<<mWidth*a0;
+            return mWidth;
         }
 		int getHeight(){
-            return mHeight*b0;
-            //std::cout<<mHeight*b0;
+            return mHeight;
         }
-		//friend class whiteloop;
+		//friend class loop;
     protected:
 
     private:
         //The actual hardware texture
 		SDL_Texture* mTexture;
-		int a0,b0;
 
-
-
+		//Image dimensions
+		int mWidth;
+		int mHeight;
 };
 
 

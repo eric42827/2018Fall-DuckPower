@@ -12,6 +12,7 @@ enum LButtonSprite
 	BUTTON_SPRITE_MOUSE_DOWN = 2,
 	BUTTON_SPRITE_MOUSE_UP = 3,
 	BUTTON_SPRITE_TOTAL = 4
+
 };
 class LButton
 {
