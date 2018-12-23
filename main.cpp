@@ -11,7 +11,7 @@ and may not be redistributed without written permission.*/
 #include<loop.h>
 #include<LTexture.h>
 #include<LButton.h>
-#include<soldier_short.h>
+#include<men_with_arms.h>
 #include<base.h>
 
 #include<BATTLE_SCENE.h>

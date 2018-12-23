@@ -10,7 +10,7 @@
 #include<loop.h>
 #include<LTexture.h>
 #include<LButton.h>
-#include<soldier_short.h>
+#include<men_with_arms.h>
 #include<base.h>
 #include <fstream>
 #include <sstream>
@@ -19,7 +19,7 @@
 #define character_num 2
 #define property_num 5
 #define cha_image 1
-#define image_num 23
+#define image_num 21
 #define icon_num 7
 
  //dimensions of base loops
@@ -29,38 +29,36 @@
         extern const int SCREEN_WIDTH ;
         extern const int SCREEN_HEIGHT ;
 const std::string str[image_num]={/*****order*****/
-        "battle.png",
-        "whiteloop.png",
-        "yellowloop.png",
-        "greenloop.png",
-        "redloop.png",
-        "blueloop.png",
-        "stand.png",
-        "stand2.png",
-        "next_turn.png",
-        "waiting.png",
-        "bar_bottom.png",
-        "bar_top.png" ,
-        "none.png" ,
-        "king.png",
-        "victory.png",
-        "barrier.png",
-        "defeat.png",
-        "melee_icon.png",
-        "archer_icon.png",
-        "air_force_icon.png",
-        "duck_melee_icon.png",
-        "duck_archer_icon.png",
-        "duck_air_force_icon.png"
+        "image/battle.png",
+        "image/whiteloop.png",
+        "image/yellowloop.png",
+        "image/greenloop.png",
+        "image/redloop.png",
+        "image/blueloop.png",
+        "image/next_turn.png",
+        "image/waiting.png",
+        "image/bar_bottom.png",
+        "image/bar_top.png" ,
+        "image/none.png" ,
+        "image/king.png",
+        "image/victory.png",
+        "image/barrier.png",
+        "image/defeat.png",
+        "image/melee_icon.png",
+        "image/archer_icon.png",
+        "image/air_force_icon.png",
+        "image/duck_melee_icon.png",
+        "image/duck_archer_icon.png",
+        "image/duck_air_force_icon.png"
         };
 const std::string name_icon[image_num]={
-        "none.png" ,
-        "melee_icon.png",
-        "archer_icon.png",
-        "air_force_icon.png",
-        "duck_melee_icon.png",
-        "duck_archer_icon.png",
-        "duck_air_force_icon.png"
+        "image/none.png" ,
+        "image/melee_icon.png",
+        "image/archer_icon.png",
+        "image/air_force_icon.png",
+        "image/duck_melee_icon.png",
+        "image/duck_archer_icon.png",
+        "image/duck_air_force_icon.png"
         };
 enum L_texture_name{
 field=0,
@@ -69,23 +67,22 @@ loop_select=2,
 loop_target=3,
 loop_foe=4,
 loop_aim=5,
-duck_ori=6,
-duck_green=7,
-next_turn=8,
-waiting=9,
-bar_bottom=10,
-bar_top=11,
-none_loop=12,
-king=13,
-victory=14,
-barrier=15,
-defeat=16,
-melee_icon=17,
-archer_icon=18,
-air_force_icon=19,
-duck_melee_icon=20,
-duck_archer_icon=21,
-duck_air_force_icon=22
+
+next_turn=6,
+waiting=7,
+bar_bottom=8,
+bar_top=9,
+none_loop=10,
+king=11,
+victory=12,
+barrier=13,
+defeat=14,
+melee_icon=15,
+archer_icon=16,
+air_force_icon=17,
+duck_melee_icon=18,
+duck_archer_icon=19,
+duck_air_force_icon=20
 };
 
 enum number_of_soldier
@@ -411,8 +408,8 @@ class BATTLE_SCENE
             //our soldiers
             /********/
             //soldiers position
-            soldier=new soldier_short*[2*sol_num+1+2];/*****/
-            for(int a=MY_1;a<=NEUTRAL_2;a++)soldier[a]=new soldier_short;
+            soldier=new men_with_arms*[2*sol_num+1+2];/*****/
+            for(int a=MY_1;a<=NEUTRAL_2;a++)soldier[a]=new men_with_arms;
             int init_pos[15]={0,5,7,1,2,10,11,32,34,28,29,37,38,18,21};/***********/
 
             for(int a=MY_1;a<=FOE_6;a++){
@@ -623,7 +620,7 @@ class BATTLE_SCENE
 
         LButton next_turn_button;
 
-        soldier_short ** soldier;
+        men_with_arms ** soldier;
 
         base tiles[tiles_num];
 
