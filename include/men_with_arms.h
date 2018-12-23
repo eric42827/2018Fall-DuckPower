@@ -56,7 +56,7 @@ void set_xy(int a,int b){
         int get_firerange(){return fire_range;}
         void set_firerange(int a){fire_range=a;}
 
-        void render(int position,base *a,LTexture* icon){
+        void render(int position,base *a){
             //set position
             const int x_i=x_dis/2-25,y_i=y_dis/2-50;
             pos=position;
