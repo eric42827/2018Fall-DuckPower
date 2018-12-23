@@ -44,6 +44,7 @@
 			<Add directory="C:/Program Files (x86)/SDL2/i686-w64-mingw32/lib" />
 		</Linker>
 		<Unit filename="include/BATTLE_SCENE.h" />
+		<Unit filename="include/BUTTON.h" />
 		<Unit filename="include/LButton.h" />
 		<Unit filename="include/LTexture.h" />
 		<Unit filename="include/base.h" />
@@ -51,6 +52,7 @@
 		<Unit filename="include/men_with_arms.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/BATTLE_SCENE.cpp" />
+		<Unit filename="src/BUTTON.cpp" />
 		<Unit filename="src/LButton.cpp" />
 		<Unit filename="src/LTexture.cpp" />
 		<Unit filename="src/base.cpp" />
