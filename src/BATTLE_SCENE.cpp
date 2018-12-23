@@ -2,7 +2,7 @@
 
 BATTLE_SCENE::BATTLE_SCENE()
 {
-
+ //ai_perform=0;
 
 }
 

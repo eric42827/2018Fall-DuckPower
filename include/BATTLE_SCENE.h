@@ -15,10 +15,12 @@
 #include <fstream>
 #include <sstream>
 #include <stdlib.h>
+#include<ctime>
 
 #define character_num 2
 #define property_num 5
 #define cha_image 1
+#define num_battle_image 1
 #define image_num 21
 #define icon_num 7
 
@@ -395,6 +397,10 @@ class BATTLE_SCENE
                     getline( templine, data,',');
                     name_of_image[a][c]=data;
                 }
+                for(int d=0;d<num_battle_image;d++){
+                    getline( templine, data,',');
+                    name_of_battle_image[a][d]=data;
+                }
                 a++;
             }
 
@@ -456,7 +462,7 @@ class BATTLE_SCENE
                     int k=soldier_cha[a];
                     soldier[a]->set_id(a);
                     int icon_label=((a-1)/6)*3+property[k][arms_property]+1;
-                    soldier[a]->load(name_of_image[k][0],&scene_image[bar_bottom],&scene_image[bar_top],name_icon[icon_label]);
+                    soldier[a]->load(name_of_image[k][0],name_of_battle_image[k][0],&scene_image[bar_bottom],&scene_image[bar_top],name_icon[icon_label]);
                     soldier[a]->render(init_pos[a],tiles);
                     soldier[a]->set_property(soldier_cha[a],property[k][arms_property],property[k][health_property]
                                              ,property[k][combat_strength_property],property[k][range_property],property[k][firerange_property]);
@@ -473,7 +479,7 @@ class BATTLE_SCENE
                     int k=soldier_cha[a];
                     if(soldier[a]!=NULL){
                     soldier[a]->set_id(a);
-                    soldier[a]->load("image/none.png",&scene_image[none],&scene_image[none],"image/none.png");
+                    soldier[a]->load("image/none.png","image/none.png",&scene_image[none],&scene_image[none],"image/none.png");
                     soldier[a]->render(init_pos[a],tiles);
                     soldier[a]->set_property(soldier_cha[a],property[k][arms_property],property[k][health_property]
                                              ,property[k][combat_strength_property],property[k][range_property],property[k][firerange_property]);
@@ -557,7 +563,18 @@ class BATTLE_SCENE
                     for(int k=0;k<tiles_num;k++)tiles[k].set_Monte(0);
                     int num=tiles[pos].get_num();
                     if(num==none)soldier[k]->go(pos,tiles);
-                    else if((num>=MY_1)and(num<=MY_6)) soldier[k]->fight(soldier,tiles,num);
+                    else if((num>=MY_1)and(num<=MY_6)){
+                        soldier[k]->fight(soldier,tiles,num);
+                        start=clock();
+
+                        while(true){
+                            clock_t now=clock();
+                            if(now-start>=7.0)break;
+                            create_battlefield();
+                            set_soldiers();
+                            SDL_RenderPresent( gRenderer );
+                        }
+                    }
 
 
                 }
@@ -565,6 +582,22 @@ class BATTLE_SCENE
             for(int j=0;j<tiles_num;j++)tiles[j].set_foe(false);
         }
         bool victory_judge(base* a,int sacred){
+            if(sacred==sacred1){
+                int num=0;
+                for(int k=MY_1;k<=MY_6;k++){
+                    if(soldier[k]==NULL)num++;
+                }
+                if(num==6)return true;
+                else return false;
+            }
+            if(sacred==sacred2){
+                int num=0;
+                for(int k=FOE_1;k<=FOE_6;k++){
+                    if(soldier[k]==NULL)num++;
+                }
+                if(num==6)return true;
+                else return false;
+            }
             if(a[sacred].get_num()!=0)return true;
             else return false;
         }
@@ -662,6 +695,8 @@ class BATTLE_SCENE
         loop target[tar_num];
         loop select[sol_num+1];
 
+        clock_t start;
+        //bool ai_perform;
 
         const int SCREEN_WIDTH =1600;
         const int SCREEN_HEIGHT = 800;
@@ -688,6 +723,7 @@ class BATTLE_SCENE
         //store property
         int property[character_num][property_num];
         std::string name_of_image[character_num][cha_image];
+        std::string name_of_battle_image[character_num][num_battle_image];
         LTexture icons[icon_num];
 
 

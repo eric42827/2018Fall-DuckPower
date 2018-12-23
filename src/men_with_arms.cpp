@@ -2,7 +2,7 @@
 
 men_with_arms::men_with_arms()
 {
-    //ctor
+    perform=0;
 }
 
 men_with_arms::~men_with_arms()

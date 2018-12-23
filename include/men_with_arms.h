@@ -6,6 +6,7 @@
 #include<LButton.h>
 #include<LTexture.h>
 #include<base.h>
+#include<ctime>
 extern const double x_dis;extern const double y_dis;
 enum soldier_arms{
     melee=0,
@@ -62,8 +63,13 @@ void set_xy(int a,int b){
             pos=position;
             set_xy(a[position].get_x()+x_i,a[position].get_y()+y_i);
             width=100;height=100;
-            image_stand.render(x,y);
+            if(perform==0)image_stand.render(x,y);
+            else if(perform==1){
+                    image_fight.render(x,y);
 
+                    clock_t now=clock();
+                    if(now-start>=5.0)perform=0;
+                    }
             //set health bar
             bar_bottom_image->render(x,y+height);
             SDL_Rect barclip[1];
@@ -79,6 +85,8 @@ void set_xy(int a,int b){
 
             //set icon
             //icon->
+            if(move_points!=0)arms_icon.setAlpha(255);
+            else arms_icon.setAlpha(100);
             arms_icon.render(x,y);
         }
         void set_character(soldier_character a){character=a;}
@@ -93,6 +101,10 @@ void set_xy(int a,int b){
         int get_strength(){return strength;}
         void fight(men_with_arms **foe,base *a,int foe_id){
             foe[foe_id]->set_health(foe[foe_id]->get_health()-this->get_strength());
+            //set animation time
+            this->perform=1;
+            start=clock();
+
             if((this->arms==melee)or(this->arms==air_force)){
                 if(foe[foe_id]->get_health()<=0){
                     int mem=this->get_pos();
@@ -123,8 +135,9 @@ void set_xy(int a,int b){
             move_range=range_input;
             fire_range=fire_range_input;
         }
-        void load(std::string stand,LTexture*bar_b,LTexture*bar_t,std::string icon){
+        void load(std::string stand,std::string fight_in,LTexture*bar_b,LTexture*bar_t,std::string icon){
             image_stand.loadFromFile(stand);
+            image_fight.loadFromFile(fight_in);
             bar_bottom_image=bar_b;
             bar_top_image=bar_t;
             arms_icon.loadFromFile(icon);
@@ -150,8 +163,11 @@ void set_xy(int a,int b){
         int move_range;
         int move_points;
         int fire_range;
+        clock_t start;
+        bool perform;
 
         LTexture image_stand;
+        LTexture image_fight;
         LTexture arms_icon;
         LTexture *bar_bottom_image;
         LTexture *bar_top_image;
