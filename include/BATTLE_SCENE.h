@@ -588,7 +588,7 @@ class BATTLE_SCENE
                     if(soldier[k]==NULL)num++;
                 }
                 if(num==6)return true;
-                else return false;
+
             }
             if(sacred==sacred2){
                 int num=0;
@@ -596,7 +596,7 @@ class BATTLE_SCENE
                     if(soldier[k]==NULL)num++;
                 }
                 if(num==6)return true;
-                else return false;
+
             }
             if(a[sacred].get_num()!=0)return true;
             else return false;

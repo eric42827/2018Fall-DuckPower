@@ -258,7 +258,7 @@
 1545575702 source:c:\users\user\desktop\save\battlefield - bigger\code\src\men_with_arms.cpp
 	"men_with_arms.h"
 
-1545563782 source:c:\users\user\desktop\new_map\battlefield - bigger\code\main.cpp
+1545578686 source:c:\users\user\desktop\new_map\battlefield - bigger\code\main.cpp
 	<SDL2/SDL.h>
 	<SDL_image.h>
 	<stdio.h>
@@ -304,7 +304,7 @@
 	<base.h>
 	<ctime>
 
-1545578410 c:\users\user\desktop\new_map\battlefield - bigger\code\include\battle_scene.h
+1545579103 c:\users\user\desktop\new_map\battlefield - bigger\code\include\battle_scene.h
 	<iostream>
 	<SDL2/SDL.h>
 	<SDL_image.h>
