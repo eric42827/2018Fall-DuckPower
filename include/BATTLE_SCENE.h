@@ -371,7 +371,7 @@ class BATTLE_SCENE
             std::fstream file;
             file.open("property.csv");
             std::string line;
-            int a=0;
+            int a=1;
             while (getline( file, line,'\n'))  //讀檔讀到跳行字元
             {
                 std::istringstream templine(line); // string 轉換成 stream
@@ -393,7 +393,7 @@ class BATTLE_SCENE
             }
 
             file.close();
-            soldier_character soldier_cha[sol_num*2+1]={DUCK_ORI,DUCK_ORI,DUCK_ORI,DUCK_ORI,DUCK_ORI,DUCK_ORI,DUCK_ORI
+            soldier_character soldier_cha[sol_num*2+1]={DUCK_ORI,NO_MEN,DUCK_ORI,DUCK_ORI,DUCK_ORI,DUCK_ORI,DUCK_ORI
                                             ,DUCK_GREEN,DUCK_GREEN,DUCK_GREEN,DUCK_GREEN,DUCK_GREEN,DUCK_GREEN};
 
             //tiles
@@ -408,15 +408,25 @@ class BATTLE_SCENE
             //our soldiers
             /********/
             //soldiers position
+
+
             soldier=new men_with_arms*[2*sol_num+1+2];/*****/
-            for(int a=MY_1;a<=NEUTRAL_2;a++)soldier[a]=new men_with_arms;
+
+            for(int a=MY_1;a<=NEUTRAL_2;a++)
+            {
+                if(soldier_cha[a]!=NO_MEN) soldier[a]=new men_with_arms;
+                else soldier[a]=NULL;
+
+            }
+
+
             int init_pos[15]={0,5,7,1,2,10,11,32,34,28,29,37,38,18,21};/***********/
 
             for(int a=MY_1;a<=FOE_6;a++){
-                    if(soldier[a]!=NULL){
+                    if(soldier[a]!=NULL and soldier_cha[a]!=NO_MEN){
                     int k=soldier_cha[a];
                     soldier[a]->set_id(a);
-                    int icon_label=((a-1)/6)*3+soldier_cha[a]+1;
+                    int icon_label=((a-1)/6)*3+property[k][arms_property]+1;
                     soldier[a]->load(name_of_image[k][0],&scene_image[bar_bottom],&scene_image[bar_top],name_icon[icon_label]);
                     soldier[a]->render(init_pos[a],tiles,&scene_image[melee_icon]);
                                         soldier[a]->set_property(soldier_cha[a],property[k][arms_property],property[k][health_property]

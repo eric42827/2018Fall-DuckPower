@@ -14,8 +14,9 @@ enum soldier_arms{
 
 };
 enum soldier_character{
-    DUCK_ORI=0,
-    DUCK_GREEN=1
+    NO_MEN=0,
+    DUCK_ORI=1,
+    DUCK_GREEN=2
 
 };
 extern const double x_dis;

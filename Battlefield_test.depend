@@ -43,7 +43,7 @@
 1545552372 source:c:\users\user\desktop\battlefield_test\battlefield_test\src\men_with_arms.cpp
 	"men_with_arms.h"
 
-1545552961 c:\users\user\desktop\battlefield_test\battlefield_test\include\men_with_arms.h
+1545554768 c:\users\user\desktop\battlefield_test\battlefield_test\include\men_with_arms.h
 	<stdio.h>
 	<SDL2/SDL.h>
 	<SDL_image.h>
@@ -65,7 +65,7 @@
 	<base.h>
 	<BATTLE_SCENE.h>
 
-1545552987 c:\users\user\desktop\battlefield_test\battlefield_test\include\battle_scene.h
+1545555601 c:\users\user\desktop\battlefield_test\battlefield_test\include\battle_scene.h
 	<iostream>
 	<SDL2/SDL.h>
 	<SDL_image.h>
