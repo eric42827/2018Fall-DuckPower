@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="Battlefield_test" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/Battlefield_test" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+					<Add directory="C:/SDL2-2.0.9/i686-w64-mingw32/include/SDL2" />
+					<Add directory="include" />
+				</Compiler>
+				<Linker>
+					<Add directory="C:/SDL2-2.0.9/i686-w64-mingw32/lib" />
+				</Linker>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/Battlefield_test" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add directory="include" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-fexceptions" />
+			<Add directory="C:/Program Files (x86)/SDL2/i686-w64-mingw32/include/SDL2" />
+		</Compiler>
+		<Linker>
+			<Add option="-lmingw32 -lSDL2main -lSDL2 -lSDL2_image" />
+			<Add directory="C:/Program Files (x86)/SDL2/i686-w64-mingw32/lib" />
+		</Linker>
+		<Unit filename="include/BATTLE_SCENE.h" />
+		<Unit filename="include/BUTTON.h" />
+		<Unit filename="include/LButton.h" />
+		<Unit filename="include/LTexture.h" />
+		<Unit filename="include/base.h" />
+		<Unit filename="include/loop.h" />
+		<Unit filename="include/men_with_arms.h" />
+		<Unit filename="main.cpp" />
+		<Unit filename="src/BATTLE_SCENE.cpp" />
+		<Unit filename="src/BUTTON.cpp" />
+		<Unit filename="src/LButton.cpp" />
+		<Unit filename="src/LTexture.cpp" />
+		<Unit filename="src/base.cpp" />
+		<Unit filename="src/loop.cpp" />
+		<Unit filename="src/men_with_arms.cpp" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

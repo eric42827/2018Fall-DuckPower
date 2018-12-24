@@ -9,6 +9,14 @@ SDL_Renderer* gRenderer = NULL;
 	mHeight = 0;
 }
 
+LTexture::LTexture(std::string path)
+{
+	//Initialize
+	loadFromFile(path);
+	/*mTexture = NULL;
+	mWidth = 0;
+	mHeight = 0;*/
+}
 LTexture::~LTexture()
 {
 	//Deallocate
