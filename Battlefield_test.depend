@@ -84,7 +84,7 @@
 1545552596 source:c:\users\user\desktop\battlefield_test\battlefield_test\src\battle_scene.cpp
 	"BATTLE_SCENE.h"
 
-1545563782 source:c:\users\user\desktop\gitupload\duckpower-1\main.cpp
+1545578686 source:c:\users\user\desktop\gitupload\duckpower-1\main.cpp
 	<SDL2/SDL.h>
 	<SDL_image.h>
 	<stdio.h>
@@ -121,15 +121,16 @@
 
 1545552596 c:\users\user\desktop\gitupload\duckpower-1\include\base.h
 
-1545561451 c:\users\user\desktop\gitupload\duckpower-1\include\men_with_arms.h
+1545577998 c:\users\user\desktop\gitupload\duckpower-1\include\men_with_arms.h
 	<stdio.h>
 	<SDL2/SDL.h>
 	<SDL_image.h>
 	<LButton.h>
 	<LTexture.h>
 	<base.h>
+	<ctime>
 
-1545563914 c:\users\user\desktop\gitupload\duckpower-1\include\battle_scene.h
+1545579103 c:\users\user\desktop\gitupload\duckpower-1\include\battle_scene.h
 	<iostream>
 	<SDL2/SDL.h>
 	<SDL_image.h>
@@ -144,11 +145,12 @@
 	<fstream>
 	<sstream>
 	<stdlib.h>
+	<ctime>
 
 1545552261 source:c:\users\user\desktop\gitupload\duckpower-1\src\base.cpp
 	"base.h"
 
-1545552596 source:c:\users\user\desktop\gitupload\duckpower-1\src\battle_scene.cpp
+1545577314 source:c:\users\user\desktop\gitupload\duckpower-1\src\battle_scene.cpp
 	"BATTLE_SCENE.h"
 
 1545566067 source:c:\users\user\desktop\gitupload\duckpower-1\src\button.cpp
@@ -167,7 +169,7 @@
 1545552596 source:c:\users\user\desktop\gitupload\duckpower-1\src\ltexture.cpp
 	"LTexture.h"
 
-1545552372 source:c:\users\user\desktop\gitupload\duckpower-1\src\men_with_arms.cpp
+1545575702 source:c:\users\user\desktop\gitupload\duckpower-1\src\men_with_arms.cpp
 	"men_with_arms.h"
 
 1545563782 source:c:\users\user\desktop\save\battlefield - bigger\code\main.cpp
@@ -295,7 +297,7 @@
 
 1545552596 c:\users\user\desktop\new_map\battlefield - bigger\code\include\base.h
 
-1545577998 c:\users\user\desktop\new_map\battlefield - bigger\code\include\men_with_arms.h
+1545632073 c:\users\user\desktop\new_map\battlefield - bigger\code\include\men_with_arms.h
 	<stdio.h>
 	<SDL2/SDL.h>
 	<SDL_image.h>
@@ -304,7 +306,7 @@
 	<base.h>
 	<ctime>
 
-1545579103 c:\users\user\desktop\new_map\battlefield - bigger\code\include\battle_scene.h
+1545632259 c:\users\user\desktop\new_map\battlefield - bigger\code\include\battle_scene.h
 	<iostream>
 	<SDL2/SDL.h>
 	<SDL_image.h>

@@ -68,7 +68,7 @@ void set_xy(int a,int b){
                     image_fight.render(x,y);
 
                     clock_t now=clock();
-                    if(now-start>=5.0)perform=0;
+                    if(now-start>=1000)perform=0;
                     }
             //set health bar
             bar_bottom_image->render(x,y+height);

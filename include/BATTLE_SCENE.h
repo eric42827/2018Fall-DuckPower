@@ -471,6 +471,9 @@ class BATTLE_SCENE
                     }
 				}
             //FOE soldiers
+            for(int k=FOE_1;k<=FOE_6;k++){
+                if(soldier[k]!=NULL)soldier[k]->set_point(soldier[k]->getrange());
+            }
 
             //soldiers position
 
@@ -537,16 +540,7 @@ class BATTLE_SCENE
                 step=SELECT_UNIT;
             }
         }
-        void AI(){
-            for(int k=0;k<tiles_num;k++){
-                tiles[k].set_foe(false);
-
-            }
-            for(int k=FOE_1;k<=FOE_6;k++){
-                if(soldier[k]!=NULL)soldier[k]->set_point(soldier[k]->getrange());
-            }
-
-            for(int k=FOE_1;k<=FOE_6;k++){
+        void AI(int k){
                 if(soldier[k]!=NULL){
                     setMonte(tiles);
                     int list_length;
@@ -565,21 +559,10 @@ class BATTLE_SCENE
                     if(num==none)soldier[k]->go(pos,tiles);
                     else if((num>=MY_1)and(num<=MY_6)){
                         soldier[k]->fight(soldier,tiles,num);
-                        start=clock();
 
-                        while(true){
-                            clock_t now=clock();
-                            if(now-start>=7.0)break;
-                            create_battlefield();
-                            set_soldiers();
-                            SDL_RenderPresent( gRenderer );
-                        }
+
                     }
-
-
                 }
-            }
-            for(int j=0;j<tiles_num;j++)tiles[j].set_foe(false);
         }
         bool victory_judge(base* a,int sacred){
             if(sacred==sacred1){
@@ -659,16 +642,28 @@ class BATTLE_SCENE
                     }
                 }
                 else {
-                        for(int k=FOE_1;k<=FOE_6;k++){
-                            if(soldier[k]!=NULL){
-                                soldier[k]->set_point(soldier[k]->getrange());
-                            }
+                        static int num=FOE_1;
+                        static bool ai_perform=1;
+                        static bool end_ai=0;
+                        if(ai_perform){
+                            AI(num);
+                            num++;
+                            ai_perform=0;
+                            start_time=clock();
                         }
-                        AI();
+                        if(clock()-start_time>=1000)ai_perform=1;
                         scene_image[waiting].render(next_turn_button.get_x(),next_turn_button.get_y());
-                        start=0;
-                        turn=MY;
-                        step=SELECT_UNIT;
+
+                        if(num==FOE_6+1 and ai_perform==1)end_ai=1;
+                        if(end_ai){
+                            num=FOE_1;
+                            ai_perform=1;
+                            end_ai=0;
+
+                            start=0;
+                            turn=MY;
+                            step=SELECT_UNIT;
+                            }
                 }
                 //buttons
 				//Update screen
@@ -695,7 +690,7 @@ class BATTLE_SCENE
         loop target[tar_num];
         loop select[sol_num+1];
 
-        clock_t start;
+        clock_t start_time;
         //bool ai_perform;
 
         const int SCREEN_WIDTH =1600;
