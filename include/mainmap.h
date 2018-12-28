@@ -5,30 +5,28 @@
 #include <stdio.h>
 #include <string>
 #include<cmath>
-#include<loop.h>
 #include<LTexture.h>
 #include<LButton.h>
-#include<soldier_short.h>
-#include<base.h>
-#include<battle.h>
-#include<mainmap.h>
 
 class mainmap
 {
     public:
+        friend class Map;
         mainmap();
         virtual ~mainmap();
-        LTexture bigmap;
-        void loadmap(bool&);
-        void mapclose(LTexture&);
-        LTexture map_icon;
-        LTexture sister;
-        LTexture mapshow1;
-        LButton map_icon_button;
-        void mapbutton(SDL_Event &,battle &);
+
+
     protected:
 
     private:
+        int l_x,l_y,k;
+
+        void set_value(int,int,int);
+        int map_but(SDL_Event &,LTexture &,LButton &);
+        void map_but(SDL_Event &a,LTexture &l,LButton &b,int &mode);
+        //void map_but(SDL_Event &,LTexture &,LButton &,int &,int,int,int);
+
+
 
 
 };

@@ -1,5 +1,6 @@
 #include "mainmap.h"
 
+
 mainmap::mainmap()
 {
 
@@ -9,57 +10,71 @@ mainmap::~mainmap()
 {
     //dtor
 }
-void mainmap:: mapclose(LTexture&m){
-    m.free();
+void mainmap::set_value(int x,int y,int z){
+    l_x=x;l_y=y;k=z;
 }
-void mainmap:: loadmap(bool &success){
+int mainmap::map_but(SDL_Event &a,LTexture &l,LButton &b){
+    b.handleEvent(&a);
+    b.setPosition(l_x,l_y);
+    b.setdim(l.mWidth,l.mHeight);
+    /*if(k==1){
+        if(b.get_sprite()==BUTTON_SPRITE_MOUSE_OVER_MOTION){
+            l.render(l_x,l_y,1.05,1.05);
+            //printf("correct");
+        }
+        else if(b.get_sprite()==BUTTON_SPRITE_MOUSE_DOWN){
+            //mode = k;
+            std::cout<<k;
+            return k;
+        }
+        else l.render(l_x,l_y);
+    }
+    else{*/
+        if(b.get_sprite()==BUTTON_SPRITE_MOUSE_OVER_MOTION){
+            l.render(l_x,l_y,0.55,0.55);
+            //printf("correct");
+        }
+        else if(b.get_sprite()==BUTTON_SPRITE_MOUSE_DOWN){
+            //mode = k;
+            //std::cout<<k;
+            return k;
+        }
+        else l.render(l_x,l_y,0.5,0.5);
+    //}
 
-    if( !bigmap.loadFromFile( "smap.png" ) )
-	{
-		printf( "Failed to load bigmap texture!\n" );
-		success = false;
-	}
-    if( !map_icon.loadFromFile( "stand.png" ) )
-	{
-		printf( "Failed to load map_icon texture!\n" );
-		success = false;
-	}
-	if( !mapshow1.loadFromFile( "s1.png" ) )
-	{
-		printf( "Failed to load mapshow1 texture!\n" );
-		success = false;
-	}
-	if( !sister.loadFromFile( "s1.png" ) )
-	{
-		printf( "Failed to load sister texture!\n" );
-		success = false;
-	}
-    printf("good");
-
-    //map_icon.free();
-    //map_icon.render(400,200);
-    //SDL_RenderPresent( gRenderer );
-
+return 0;
+            //SDL_RenderPresent( gRenderer );
 }
-void mainmap:: mapbutton(SDL_Event &a,battle &b){
-    //printf("test");
-    bigmap.render(0,0);
-    //map_icon.render(1160,220,0.25,0.25);
-    map_icon_button.handleEvent(&a);
-    map_icon_button.setPosition(1160,220);
-    map_icon_button.setdim(519*0.5,419*0.5);
-    //map_icon_button.setdim(1600,800);
-    if(map_icon_button.get_sprite()==BUTTON_SPRITE_MOUSE_OVER_MOTION){
-        //map_icon.free();
-        //mapshow1.render(1160,220,0.5,0.5);
-        map_icon.render(1140,210,1,1);
-        printf("correct");
+
+void mainmap::map_but(SDL_Event &a,LTexture &l,LButton &b,int &mode){
+    b.handleEvent(&a);
+    b.setPosition(l_x,l_y);
+    b.setdim(l.mWidth,l.mHeight);
+    /*if(k==1){
+        if(b.get_sprite()==BUTTON_SPRITE_MOUSE_OVER_MOTION){
+            l.render(l_x,l_y,1.05,1.05);
+            //printf("correct");
+        }
+        else if(b.get_sprite()==BUTTON_SPRITE_MOUSE_DOWN){
+            //mode = k;
+            std::cout<<k;
+            return k;
+        }
+        else l.render(l_x,l_y);
     }
-    else if(map_icon_button.get_sprite()==BUTTON_SPRITE_MOUSE_DOWN){
-        //sister.render(1160,220,0.5,0.5);
-        //b.battlestart(a);
-        return;
-    }
-    else map_icon.render(1160,220,0.8,0.8);
-    SDL_RenderPresent( gRenderer );
+    else{*/
+        if(b.get_sprite()==BUTTON_SPRITE_MOUSE_OVER_MOTION){
+            l.render(l_x,l_y,0.55,0.55);
+            //printf("correct");
+        }
+        else if(b.get_sprite()==BUTTON_SPRITE_MOUSE_DOWN){
+            //mode = k;
+            mode=k;
+            return;
+        }
+        else l.render(l_x,l_y,0.5,0.5);
+    //}
+
+return;
+            //SDL_RenderPresent( gRenderer );
 }

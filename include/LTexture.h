@@ -1,6 +1,7 @@
+#define _GLIBCXX_USE_CXX11_ABI 0
 #ifndef LTEXTURE_H
 #define LTEXTURE_H
-#include<iostream>
+
 #include <SDL2/SDL.h>
 #include <SDL_image.h>
 #include <stdio.h>
@@ -12,13 +13,12 @@ extern SDL_Renderer* gRenderer ;
 class LTexture
 {
     public:
-        int x0,y0;
-        LTexture();
-        virtual ~LTexture();
-        //Loads image at specified path
-        		//Image dimensions
         int mWidth;
 		int mHeight;
+        LTexture();
+        LTexture(std::string path);
+        virtual ~LTexture();
+        //Loads image at specified path
 		bool loadFromFile( std::string path )
 		{
         //Get rid of preexisting texture
@@ -59,6 +59,14 @@ class LTexture
             mTexture = newTexture;
             return mTexture != NULL;
         }
+        void flip_render(int x,int y){
+            SDL_Rect srcRect= { 0, 0, mWidth, mHeight };
+            SDL_Rect desRect= { x, y, mWidth, mHeight };
+            SDL_RendererFlip flip=SDL_FLIP_HORIZONTAL;
+            SDL_Point mpoint;mpoint.x=x;mpoint.y=y;
+            //Render to screen
+            SDL_RenderCopyEx( gRenderer, mTexture,&srcRect , &desRect ,0,&mpoint,flip);
+        }
 
             //Deallocates texture
         void free()
@@ -94,35 +102,55 @@ class LTexture
         }
 
 		//Renders texture at given point
-		/************зя************/
-		void render( int x, int y,double a=1.0,double b=1.0)
+		/*void render( int x, int y )
+        {
+            //Set rendering space and render to screen
+            SDL_Rect renderQuad = { x, y, mWidth, mHeight };
+
+
+            //Render to screen
+            SDL_RenderCopy( gRenderer, mTexture, NULL, &renderQuad );
+        }*/
+        void render( int x, int y,double a=1.0,double b=1.0)
         {
             //Set rendering space and render to screen
             SDL_Rect renderQuad = { x, y, mWidth*a, mHeight*b};
-            a0=a;b0=b;x=x0;y=y0;
+            //a0=a;b0=b;
             //std::cout<<mWidth*a0<<" ";
             //std::cout<<mHeight*b0;
             //Render to screen
             SDL_RenderCopy( gRenderer, mTexture, NULL, &renderQuad );
         }
-		//Gets image dimensions
+        void render( int x, int y, SDL_Rect* clip )
+        {
+        //Set rendering space and render to screen
+        SDL_Rect renderQuad = { x, y, mWidth, mHeight };
+
+        //Set clip rendering dimensions
+        if( clip != NULL )
+        {
+            renderQuad.w = clip->w;
+            renderQuad.h = clip->h;
+        }
+
+        //Render to screen
+        SDL_RenderCopy( gRenderer, mTexture, clip, &renderQuad );
+        }
+		//Get image dimensions
 		int getWidth(){
-            return mWidth*a0;
-            //std::cout<<mWidth*a0;
+            return mWidth;
         }
 		int getHeight(){
-            return mHeight*b0;
-            //std::cout<<mHeight*b0;
+            return mHeight;
         }
-		//friend class whiteloop;
+		//friend class loop;
     protected:
 
     private:
         //The actual hardware texture
 		SDL_Texture* mTexture;
-		int a0,b0;
 
-
+		//Image dimensions
 
 };
 

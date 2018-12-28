@@ -12,13 +12,14 @@ enum LButtonSprite
 	BUTTON_SPRITE_MOUSE_DOWN = 2,
 	BUTTON_SPRITE_MOUSE_UP = 3,
 	BUTTON_SPRITE_TOTAL = 4
+
 };
 class LButton
 {
     public:
         LButton();
         virtual ~LButton();
-        void setPosition( int x, int y )
+    void setPosition( int x, int y )
         {
             mPosition.x = x;
             mPosition.y = y;
@@ -99,6 +100,7 @@ class LButton
         int get_pos(){return pos;}
         LButtonSprite get_sprite(){return mCurrentSprite;}
 
+        friend class loop;
     protected:
 
     private:
@@ -111,6 +113,11 @@ class LButton
 
 		//Currently used global sprite
 		LButtonSprite mCurrentSprite;
+
+
+
+
+
 };
 
 #endif // LBUTTON_H

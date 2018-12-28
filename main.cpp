@@ -1,106 +1,37 @@
-/*This source code copyrighted by Lazy Foo' Productions (2004-2015)
-and may not be redistributed without written permission.*/
-
-//Using SDL, SDL_image, standard IO, and strings
-#include<iostream>
+#define _GLIBCXX_USE_CXX11_ABI 0
 #include <SDL2/SDL.h>
 #include <SDL_image.h>
 #include <stdio.h>
+#include<ostream>
 #include <string>
 #include<cmath>
 #include<loop.h>
 #include<LTexture.h>
 #include<LButton.h>
-#include<soldier_short.h>
+#include<men_with_arms.h>
 #include<base.h>
-#include<battle.h>
+#include<BUTTON.h>
 #include<mainmap.h>
-//#include<windows.h>
-
-/********Important Constants********/
-const int SCREEN_WIDTH =1600;
-const int SCREEN_HEIGHT = 800;
+#include<Map.h>
+#include<BATTLE_SCENE.h>
+//#define _GLIBCXX_USE_CXX11_ABI 0
+#define N 40
+#define sol_num 6
+#define tar_num 60
 
 /********Objects Declaration********/
 //The window we'll be rendering to
 SDL_Window* gWindow = NULL;
+//BATTLE_SCENE DUCK_POWER;
 
-/********Battle Declaration********/
-    LTexture field;
-    LTexture loop_tile;
-    LTexture loop_select;
-    LTexture loop_target;
-    LTexture loop_aim;
-    LTexture duck_ori;
-    LTexture duck_green;
-    LTexture next_turn;
-    LTexture waiting;
-    const int TOTAL_BUTTONS=6;
-    //positions of next turn
-    const int x_next=1275;
-    const int y_next=25;
-    //adjust the positions of bases
-    const double x_init=170.0;
-    const double y_init=45.0;
-    //dimensions of base loops
-    const double x_dis=135.0;
-    const double y_dis=150.0;
-    //number of base loops
-    const int x_num=9;
-    const int y_num=5;
-    const int sacred1=6;
-       enum whose_turn
-    {
-     MY=0,
-     FOE=1
-    };
-    enum which_step
-    {
-     SELECT_UNIT=0,
-     SELECT_TARGET=1
-    };
-    enum number_of_soldier
-    {
-     none=0,
-     MY_1=1,
-     MY_2=2,
-     MY_3=3,
-     MY_4=4,
-     MY_5=5,
-     MY_6=6,
-     FOE_1=7,
-     FOE_2=8,
-     FOE_3=9,
-     FOE_4=10,
-     FOE_5=11,
-     FOE_6=12
-    };
-    base tiles[q];
+/********Function Declaration********/
 
-    loop select;
-    loop target;
-
-    soldier_short  mine[2*sol_num+1];
-    soldier_short  foe[sol_num+1];
-
-    LButton buttons_select[sol_num+1];
-    LButton buttons_aim[tar_num];
-    LButton next_turn_button;
-/********golbal function********/
 
 //Starts up SDL and creates window
-bool init();
+bool init();/***no need***/
 
 //Loads media
-bool loadMedia(battle &,mainmap &);
 
-void close();
-
-/********battle function********/
-
-/********Map Declaration********/
-
-/********Map function********/
 
 /********Function Explanation********/
 
@@ -157,20 +88,10 @@ bool init()
 
 	return success;
 }
-bool loadMedia(battle &b,mainmap &m)
-{
-	//Loading success flag
-	bool success = true;
-    b.battlesuccess(success);
-    m.loadmap(success);
-    return success;
-	//Load sprite sheet texture
 
-}
+
 void close()
 {
-
-
 	//Destroy window
 	SDL_DestroyRenderer( gRenderer );
 	SDL_DestroyWindow( gWindow );
@@ -185,28 +106,28 @@ void close()
 int main( int argc, char* args[] )
 {
 	//Start up SDL and create window
-	battle b;
-	mainmap m;
+	Map m;
 	if( !init() )
 	{
 		printf( "Failed to initialize!\n" );
 	}
 	else
 	{
-		//Load media
-		if( !loadMedia(b,m) )
-		{
-			printf( "Failed to load media!\n" );
-		}
-		else
-		{
+	    //DUCK_POWER.load();
+
+
 			//Main loop flag
 			bool quit = false;
-
+            m.Map_ini();
 			//Event handler
 			SDL_Event e;
 
+			//Current animation frame
+			int frame = 0;
 
+            //initialization
+            BATTLE_SCENE DUCK_POWER(0);
+			//While application is running
 			while( !quit )
 			{
 
@@ -219,54 +140,16 @@ int main( int argc, char* args[] )
 						quit = true;
 					}
 
-				}
-
-				//Clear screen
-				SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
-				SDL_RenderClear( gRenderer );
-
-				/*******visualization*******/
-                        //Current animation frame
-                //int input;
-                //std::cin >>input;
-                //b.battlestart(e);
-                m.mapbutton(e,b);
-               if(m.map_icon_button.get_sprite()==BUTTON_SPRITE_MOUSE_DOWN){
-                break;
-               }
-                //m.map_icon.render(1160,220,0.25,0.25);
-                //if(input)b.battleclose();
-                //bigmap.render(0,0);
-			}
-			//Sleep(500);
-			while(!quit){
-                while( SDL_PollEvent( &e ) != 0 )
-				{
-					//User requests quit
-                    if( e.type == SDL_QUIT )
-					{
-						quit = true;
-					}
+                    //DUCK_POWER.test();
 
 				}
-
-				//Clear screen
-				SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
-				SDL_RenderClear( gRenderer );
-                b.battlestart(e);
+                    m.Map_mode(e,DUCK_POWER);
+                    //DUCK_POWER.battle(e,quit);
+                    //SDL_RenderPresent( gRenderer );
 			}
-		}
-	}
-
 
 	//Free resources and close SDL
-	//(m.bigmap).free();
-	//b.battleclose(b._test);
 	close();
-
+	}
 	return 0;
 }
-
-
-
-
