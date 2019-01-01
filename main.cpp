@@ -126,6 +126,8 @@ int main( int argc, char* args[] )
 			int frame = 0;
 
             //initialization
+            //BATTLE_SCENE DUCK_POWER[12];
+            //for(int i=0;i<12;i++)BATT DUCK_POWER[i]= new BATTLE_SCENE (0);
             BATTLE_SCENE DUCK_POWER(0);
 			//While application is running
 			while( !quit )

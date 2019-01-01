@@ -2,6 +2,7 @@
 
 Map::Map()
 {
+    //aload();
     //ctor
 }
 
@@ -21,5 +22,5 @@ void Map::load(){
     for(int k=0;k<icon_num;k++){
         icon[k].loadFromFile(icon_image[k]);
     }
-    printf("k");
+    //printf("k");
 }

@@ -63,7 +63,8 @@ class Map
         virtual ~Map();
         void Map_ini();
         void Map_mode(SDL_Event &e,BATTLE_SCENE &b){
-            static int mode = 1;
+        //void Map_mode(SDL_Event &e,BATTLE_SCENE b[]){
+
             switch(mode){
                 case 1:
                     map[bigmap].render(0,0);
@@ -74,7 +75,7 @@ class Map
                             iconb[i].set_value(x[i],y[i],2);
                             //mode=iconb[i].map_but(e,icon[i],map_button[i]);
                             iconb[i].map_but(e,icon[i],map_button[i],mode);
-                            if(mode!=1){printf("w");SDL_Delay(200);break;}
+                            if(mode!=1){i0=i; printf("w");SDL_Delay(200);break;}
 
                         }
 
@@ -86,6 +87,7 @@ class Map
                     break;
                 case 2:
                     static int a=1;
+                    //b[i0].battle(e,mode);
                     b.battle(e,mode);
                     iconb[goback].set_value(0,550,1);
                     //mode=iconb[goback].map_but(e,icon[goback],map_button[goback]);
@@ -105,10 +107,13 @@ class Map
     protected:
 
     private:
+        int i0;
+        int mode = 1;
         LTexture map[map_num];
         LTexture icon[icon_num];
         LButton map_button[icon_num];
         mainmap iconb[icon_num];
+        BATTLE_SCENE b[12];
         void load();
         bool judge[12]={1,0,0,0,0,0,0,0,0,0,0,0};
         //mainmap big;
