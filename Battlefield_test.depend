@@ -460,3 +460,114 @@
 1545824429 source:c:\users\user\desktop\duckpower-battlefield\src\map.cpp
 	"Map.h"
 
+1546317986 source:c:\users\user\desktop\gitupload\duckpower\main.cpp
+	<SDL2/SDL.h>
+	<SDL_image.h>
+	<stdio.h>
+	<ostream>
+	<string>
+	<cmath>
+	<loop.h>
+	<LTexture.h>
+	<LButton.h>
+	<men_with_arms.h>
+	<base.h>
+	<BUTTON.h>
+	<mainmap.h>
+	<Map.h>
+	<BATTLE_SCENE.h>
+
+1546313937 c:\users\user\desktop\gitupload\duckpower\include\loop.h
+	<SDL2/SDL.h>
+	<SDL_image.h>
+	<LButton.h>
+	<LTexture.h>
+	<base.h>
+
+1546313937 c:\users\user\desktop\gitupload\duckpower\include\lbutton.h
+	<SDL2/SDL.h>
+	<SDL_image.h>
+	<stdio.h>
+	<string>
+	<cmath>
+
+1546313937 c:\users\user\desktop\gitupload\duckpower\include\ltexture.h
+	<SDL2/SDL.h>
+	<SDL_image.h>
+	<stdio.h>
+	<string>
+	<cmath>
+
+1546313937 c:\users\user\desktop\gitupload\duckpower\include\base.h
+
+1546317986 c:\users\user\desktop\gitupload\duckpower\include\men_with_arms.h
+	<stdio.h>
+	<SDL2/SDL.h>
+	<SDL_image.h>
+	<LButton.h>
+	<LTexture.h>
+	<base.h>
+	<ctime>
+
+1546313937 c:\users\user\desktop\gitupload\duckpower\include\button.h
+	<LTexture.h>
+	<LButton.h>
+
+1546313937 c:\users\user\desktop\gitupload\duckpower\include\mainmap.h
+	<SDL2/SDL.h>
+	<SDL_image.h>
+	<stdio.h>
+	<string>
+	<cmath>
+	<LTexture.h>
+	<LButton.h>
+
+1546313937 c:\users\user\desktop\gitupload\duckpower\include\map.h
+	<SDL2/SDL.h>
+	<BATTLE_SCENE.h>
+	<mainmap.h>
+
+1546317986 c:\users\user\desktop\gitupload\duckpower\include\battle_scene.h
+	<iostream>
+	<SDL2/SDL.h>
+	<SDL_image.h>
+	<stdio.h>
+	<string.h>
+	<cmath>
+	<loop.h>
+	<LTexture.h>
+	<LButton.h>
+	<men_with_arms.h>
+	<base.h>
+	<fstream>
+	<sstream>
+	<stdlib.h>
+	<ctime>
+
+1546313937 source:c:\users\user\desktop\gitupload\duckpower\src\base.cpp
+	"base.h"
+
+1546317986 source:c:\users\user\desktop\gitupload\duckpower\src\battle_scene.cpp
+	"BATTLE_SCENE.h"
+
+1546313937 source:c:\users\user\desktop\gitupload\duckpower\src\button.cpp
+	"BUTTON.h"
+
+1546313937 source:c:\users\user\desktop\gitupload\duckpower\src\lbutton.cpp
+	"LButton.h"
+
+1546313937 source:c:\users\user\desktop\gitupload\duckpower\src\loop.cpp
+	"loop.h"
+
+1546313937 source:c:\users\user\desktop\gitupload\duckpower\src\ltexture.cpp
+	"LTexture.h"
+
+1546313937 source:c:\users\user\desktop\gitupload\duckpower\src\mainmap.cpp
+	"mainmap.h"
+
+1546313937 source:c:\users\user\desktop\gitupload\duckpower\src\map.cpp
+	"Map.h"
+
+1546313937 source:c:\users\user\desktop\gitupload\duckpower\src\men_with_arms.cpp
+	"men_with_arms.h"
+
