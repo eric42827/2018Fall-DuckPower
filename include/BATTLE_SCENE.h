@@ -1,3 +1,4 @@
+#define _GLIBCXX_USE_CXX11_ABI 0
 #ifndef BATTLE_SCENE_H
 #define BATTLE_SCENE_H
 
@@ -17,13 +18,18 @@
 #include <stdlib.h>
 #include<ctime>
 
-#define character_num 6
+#define character_num 27
 #define property_num 5
 #define cha_image 1
 #define num_battle_image 1
 #define image_num 21
 #define icon_num 6
 
+#define sacred_left 6
+#define sacred_right 33
+
+#define x_num 9
+#define y_num 5
 
 
 enum L_texture_name{
@@ -62,8 +68,8 @@ enum property_of_soldiers{
 };
 enum whose_turn
 {
- MY=0,
- FOE=1
+ MY=1,
+ FOE=0
 };
 enum which_step
 {
@@ -100,13 +106,13 @@ class BATTLE_SCENE
 				//soldiers
 				set_soldiers();
                 //victory judge
-                if(victory_judge(tiles,sacred2)){
+                if(victory_judge(tiles,sacred_right)){
                         scene_image[victory].render(SCREEN_WIDTH/2-scene_image[victory].getWidth()/2,SCREEN_HEIGHT/2-scene_image[victory].getHeight()/2);
-                        mode=1;
+                        mode=true;
                 }
-                if(victory_judge(tiles,sacred1)){
+                if(victory_judge(tiles,sacred_left)){
                         scene_image[defeat].render(SCREEN_WIDTH/2-scene_image[victory].getWidth()/2,SCREEN_HEIGHT/2-scene_image[victory].getHeight()/2);
-                        mode=1;
+                        mode=true;
                 }
                 static bool start=0;
                 if(turn==MY){
@@ -165,7 +171,6 @@ class BATTLE_SCENE
 
     protected:
 
-    private:
 
         LTexture scene_image[image_num];
 
@@ -180,10 +185,9 @@ class BATTLE_SCENE
 
         clock_t start_time;
 
-        const int x_num=9;
-        const int y_num=5;
-        const int sacred1=6;
-        const int sacred2=33;
+
+        //const int sacred_left=6;
+        //const int sacred_right=33;
         //AI
         const int sacredmonte=100;
         const int degenerate_rate=5;
@@ -212,6 +216,7 @@ class BATTLE_SCENE
         "image/duck_melee_icon.png",
         "image/duck_archer_icon.png",
         "image/duck_air_force_icon.png"
+
         };
         const std::string name_icon[icon_num+1]={
         "image/none.png" ,
@@ -229,7 +234,30 @@ class BATTLE_SCENE
         "image/character/duck_red.png",
         "image/character/duck_beijing.png",
         "image/character/swan.png",
-        "image/character/black_swan.png"
+        "image/character/black_swan.png",
+        "image/character/seagull.png",
+        "image/character/ceiba.png",
+        "image/character/penguin.png",
+        "image/character/red_bird.png",
+        "image/character/rubber_duck.png",
+        "image/character/moltres.png",
+        //Humans
+        "image/human/normal.png",
+        "image/human/human1.png",
+        "image/human/human2.png",
+        "image/human/shooter.png",
+        "image/human/batman.png",
+        "image/human/ike.png",
+        "image/human/human3.png",
+        "image/human/human4.png",
+        "image/human/fly.png",
+        "image/human/shooter2.png",
+        "image/human/magic1.png",
+        "image/human/fly2.png",
+        "image/human/fly3.png",
+        "image/human/roy.png",
+        "image/human/legend.png"
+
         };
         const std::string battle_image_name[character_num+1]={
         "image/none.png" ,
@@ -238,9 +266,30 @@ class BATTLE_SCENE
         "image/character/duck_red_quack.png",
         "image/character/duck_beijing_quack.png",
         "image/character/swan_quack.png",
-        "image/character/black_swan_quack.png"
+        "image/character/black_swan_quack.png",
+        "image/character/seagull_quack.png",
+        "image/character/ceiba_quack.png",
+        "image/character/penguin_quack.png",
+        "image/character/red_bird_quack.png",
+        "image/character/rubber_duck_quack.png",
+        "image/character/moltres_quack.png",
+        //Humans
+        "image/human/normal.png",
+        "image/human/human1.png",
+        "image/human/human2.png",
+        "image/human/shooter.png",
+        "image/human/batman.png",
+        "image/human/ike.png",
+        "image/human/human3.png",
+        "image/human/human4.png",
+        "image/human/fly.png",
+        "image/human/shooter2.png",
+        "image/human/magic1.png",
+        "image/human/fly2.png",
+        "image/human/fly3.png",
+        "image/human/roy.png",
+        "image/human/legend.png"
         };
-
         //store property
         int property[character_num][property_num];
         LTexture icons[icon_num];
@@ -285,7 +334,7 @@ class BATTLE_SCENE
                     arms=soldier[a[sel].soldier_num]->get_arms();
             }
             if(n==0){
-                if((sel!=tar)and(sel!=sacred1)){
+                if((sel!=tar)and(sel!=sacred_left)){
                     if((a[sel].soldier_num==none)){
                         target[count].render(sel,e,BUTTON_SPRITE_MOUSE_OVER_MOTION,tiles,&scene_image[loop_target],&scene_image[loop_aim]);
                         count++;
@@ -343,7 +392,7 @@ class BATTLE_SCENE
                     arms=soldier[a[sel].soldier_num]->get_arms();
             }
             if(n==0){
-                if((sel!=tar)and(sel!=sacred2)){
+                if((sel!=tar)and(sel!=sacred_right)){
                     if((a[sel].soldier_num==none)){
                         count++;
                     }
@@ -398,7 +447,7 @@ class BATTLE_SCENE
                     arms=soldier[a[sel].soldier_num]->get_arms();
             }
             if(n==0){
-                if((sel!=tar)and(sel!=sacred2)){
+                if((sel!=tar)and(sel!=sacred_right)){
                     if((a[sel].soldier_num==none)){
                         pre_pos[count]=sel;
                         count++;
@@ -449,18 +498,18 @@ class BATTLE_SCENE
         }
         void setMonte(base *a){
             for(int k=0;k<tiles_num;k++){
-            if(k!=sacred1)a[k].set_Monte(sacredmonte/(degenerate_rate*distance(k,sacred1,a)));
+            if(k!=sacred_left)a[k].set_Monte(sacredmonte/(degenerate_rate*distance(k,sacred_left,a)));
             else a[k].set_Monte(sacredmonte*2);
             int num=a[k].soldier_num;
-            if(num>=MY_1 and num<=MY_6)a[k].set_Monte(a[k].Monte+foe_enhance*5/distance(k,sacred2,tiles)+foe_health_incr*(soldier[num]->get_maxhealth()-soldier[num]->get_health())/20);
+            if(num>=MY_1 and num<=MY_6)a[k].set_Monte(a[k].Monte+foe_enhance*5/distance(k,sacred_right,tiles)+foe_health_incr*(soldier[num]->get_maxhealth()-soldier[num]->get_health())/20);
             }
         }
         /***Highest Level Function***/
         void create_battlefield(){
             scene_image[field].render( 0,0);
             const int x_l=x_dis/2-x_adj;const int y_l=y_dis/2-y_adj;
-            scene_image[king].render(tiles[sacred1].x+x_l,tiles[sacred1].y+y_l);
-            scene_image[king].render(tiles[sacred2].x+x_l,tiles[sacred2].y+y_l);
+            scene_image[king].render(tiles[sacred_left].x+x_l,tiles[sacred_left].y+y_l);
+            scene_image[king].render(tiles[sacred_right].x+x_l,tiles[sacred_right].y+y_l);
             for(int a=0;a<tiles_num;a++){
                     if(tiles[a].soldier_num<=FOE_6)scene_image[loop_tile].render(tiles[a].x,tiles[a].y);
             }
@@ -545,7 +594,7 @@ class BATTLE_SCENE
                 }
         }
         bool victory_judge(base* a,int sacred){
-            if(sacred==sacred1){
+            if(sacred==sacred_left){
                 int num=0;
                 for(int k=MY_1;k<=MY_6;k++){
                     if(soldier[k]==NULL)num++;
@@ -553,7 +602,7 @@ class BATTLE_SCENE
                 if(num==6)return true;
 
             }
-            if(sacred==sacred2){
+            else if(sacred==sacred_right){
                 int num=0;
                 for(int k=FOE_1;k<=FOE_6;k++){
                     if(soldier[k]==NULL)num++;
@@ -570,6 +619,123 @@ class BATTLE_SCENE
         }
 
         }
+        /*****Initialization****/
+        void initialize(int category){
+            //load image
+            load();
+
+            //property loading
+            std::fstream file;
+            file.open("property.csv");
+            std::string line;
+            int a=1;
+            while (getline( file, line,'\n'))  //讀檔讀到跳行字元
+            {
+                std::istringstream templine(line); // string 轉換成 stream
+                std::string data;
+
+                int buffer=2;
+                for(int b=0;b<buffer;b++){
+                    getline( templine, data,',');
+                }
+                for(int b=0;b<property_num;b++){
+                    getline( templine, data,',');
+                    property[a][b]=atoi(data.c_str());//std::cout<<property[a][b];
+                }
+                a++;
+            }
+
+            file.close();
+            soldier_character soldier_cha[sol_num*3+1]={DUCK_ORI,ROY,FLY3,LEGEND,SHOOTER2,MAGIC1,FLY2
+                                            ,DUCK_ORI,DUCK_ORI,DUCK_ORI,DUCK_ORI,DUCK_ORI,DUCK_ORI
+                                            ,DUCK_ORI,DUCK_ORI,DUCK_ORI,DUCK_ORI,DUCK_ORI,DUCK_ORI};
+
+            //tiles
+			int count=0;
+			for(int a=0;a<x_num;a++){
+                    for(int b=0;b<y_num-(a+1)%2;b++){
+                        tiles[count].set_xy(a*x_dis+x_init, b*y_dis+y_init+y_dis*((a+1)%2)/2);
+                        tiles[count].setsoldier_num(none);
+                        count++;
+                    }
+				}
+            //our soldiers
+            /********/
+            //soldiers position
+
+
+            soldier=new men_with_arms*[3*sol_num+1];/*****/
+
+            for(int a=MY_1;a<=NEUTRAL_6;a++)
+            {
+                if(soldier_cha[a]!=NO_MEN) soldier[a]=new men_with_arms;
+                else soldier[a]=NULL;
+
+            }
+            int init_pos[19];
+            switch (category){
+                case 0:
+                    {
+                    int a[19]={0,5,7,1,2,10,11,32,34,28,29,37,38,40,40,40,40,40,40};/***********/
+                    for(int k=0;k<19;k++){init_pos[k]=a[k];}
+                    break;
+                    }
+
+                case 1:
+                    {
+                    int b[19]={0,5,7,1,2,10,11,32,34,28,29,37,38,18,21,0,3,36,39};/***********/
+                    for(int k=0;k<19;k++){init_pos[k]=b[k];}
+                    break;
+                    }
+
+                case 2:
+                    {
+                    int c[19]={0,5,7,1,2,10,11,32,34,28,29,37,38,19,20,0,15,24,39};/***********/
+                    for(int k=0;k<19;k++){init_pos[k]=c[k];}
+                    break;
+                    }
+
+
+            }
+
+            for(int a=MY_1;a<=FOE_6;a++){
+                    if(soldier[a]!=NULL and soldier_cha[a]!=NO_MEN){
+                    int k=soldier_cha[a];
+                    soldier[a]->set_id(a);
+                    int icon_label=((a-1)/6)*3+property[k][arms_property]+1;
+                    soldier[a]->load(stand_image_name[k],battle_image_name[k],&scene_image[bar_bottom],&scene_image[bar_top],name_icon[icon_label]);
+                    soldier[a]->render(init_pos[a],tiles);
+                    soldier[a]->set_property(soldier_cha[a],property[k][arms_property],property[k][health_property]
+                                             ,property[k][combat_strength_property],property[k][range_property],property[k][firerange_property]);
+
+
+                    }
+				}
+            //FOE soldiers
+            for(int k=FOE_1;k<=FOE_6;k++){
+                if(soldier[k]!=NULL)soldier[k]->set_point(soldier[k]->getrange());
+            }
+
+            //soldiers position
+
+
+            for(int a=NEUTRAL_1;a<=NEUTRAL_6;a++){
+                    int k=soldier_cha[a];
+                    if(soldier[a]!=NULL){
+                    soldier[a]->set_id(a);
+                    soldier[a]->load("image/none.png","image/none.png",&scene_image[none],&scene_image[none],"image/none.png");
+                    soldier[a]->render(init_pos[a],tiles);
+                    soldier[a]->set_property(soldier_cha[a],property[k][arms_property],property[k][health_property]
+                                             ,property[k][combat_strength_property],property[k][range_property],property[k][firerange_property]);
+                    }
+				}
+            //buttons position and dimensions
+            int l_x=x_next;int l_y=y_next;
+            next_turn_button.setPosition(l_x,l_y);
+            next_turn_button.setdim(scene_image[next_turn].getWidth(),scene_image[next_turn].getHeight());
+        }
+
+    private:
 
 
 };

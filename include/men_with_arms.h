@@ -1,8 +1,11 @@
 #ifndef MEN_WITH_ARMS_H
 #define MEN_WITH_ARMS_H
 #include <stdio.h>
+#include<iostream>
 #include <SDL2/SDL.h>
 #include <SDL_image.h>
+#include<stdlib.h>
+#include<cmath>
 
 #include<LButton.h>
 #include<LTexture.h>
@@ -16,13 +19,37 @@ enum soldier_arms{
 
 };
 enum soldier_character{
+    //DUCKS
     NO_MEN=0,
     DUCK_ORI=1,
     DUCK_GREEN=2,
     DUCK_RED=3,
     DUCK_BEIJING=4,
     SWAN=5,
-    BLACK_SWAN=6
+    BLACK_SWAN=6,
+    SEAGULL=7,
+    CEIBA=8,
+    PENGUIN=9,
+    RED_BIRD=10,
+    RUBBER_DUCK=11,
+    MOLTRES=12,
+
+
+    NORMAL=13,
+    HUMAN1=14,
+    HUMAN2=15,
+    SHOOTER=16,
+    BATMAN=17,
+    IKE =18,
+    HUMAN3=19,
+    HUMAN4=20,
+    FLY=21,
+    SHOOTER2=22,
+    MAGIC1=23,
+    FLY2=24,
+    FLY3=25,
+    ROY=26,
+    LEGEND=27
 
 };
 enum number_of_soldier
@@ -57,7 +84,8 @@ class men_with_arms
 
 
     friend class BATTLE_SCENE;
-
+    friend class BATTLE_SCENE_SINGAL;
+    friend class BATTLE_SCENE_MULTI;
     protected:
 
     private:
@@ -88,6 +116,21 @@ class men_with_arms
         LTexture arms_icon;
         LTexture *bar_bottom_image;
         LTexture *bar_top_image;
+
+        //Randomize attack_points
+        int Random(int strength){
+            int sum=0;
+            double sum2=0.;
+            for(int i=strength;i<=1.5*strength;i++)sum+=pow(i,2);
+            int c=rand();
+
+            for(int i=0;i<=0.5*strength;i++){
+                sum2+=pow((1.5*strength-i),2);
+                if(c<=RAND_MAX*sum2/(sum))
+
+                    return i+strength;
+            }
+        }
 
         //set and get x,y
         void set_xy(int a,int b){
@@ -190,7 +233,8 @@ class men_with_arms
 
         //fight with another soldier on another tile
         void fight(men_with_arms **foe,base *a,int foe_id){
-            foe[foe_id]->set_health(foe[foe_id]->get_health()-this->get_strength());
+
+            foe[foe_id]->set_health(foe[foe_id]->get_health()-Random(strength));
             //set animation time
             this->perform=1;
             start=clock();
@@ -221,7 +265,7 @@ class men_with_arms
             max_health=health_input;
             health=health_input;
             strength=strength_input;
-            move_range=range_input;
+            move_range=range_input;move_points=range_input;
             fire_range=fire_range_input;
         }
         //load images of soldier

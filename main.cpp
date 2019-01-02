@@ -106,7 +106,7 @@ void close()
 int main( int argc, char* args[] )
 {
 	//Start up SDL and create window
-	Map m;
+	Map g;
 	if( !init() )
 	{
 		printf( "Failed to initialize!\n" );
@@ -118,7 +118,7 @@ int main( int argc, char* args[] )
 
 			//Main loop flag
 			bool quit = false;
-            m.Map_ini();
+            g.Map_ini();
 			//Event handler
 			SDL_Event e;
 
@@ -126,8 +126,12 @@ int main( int argc, char* args[] )
 			int frame = 0;
 
             //initialization
-            //BATTLE_SCENE DUCK_POWER[12];
-            //for(int i=0;i<12;i++)BATT DUCK_POWER[i]= new BATTLE_SCENE (0);
+            BATTLE_SCENE **DUCK=new BATTLE_SCENE* [12];
+            for(int i=0;i<12;i++)DUCK[i]=new BATTLE_SCENE(0);
+            //DUCK[0]=new BATTLE_SCENE(0);
+            //DUCK[1]=new BATTLE_SCENE(0);
+            //{BATTLE_SCENE *temp=new BATTLE_SCENE(0);DUCK+i=temp;}//delete[]temp;}
+
             BATTLE_SCENE DUCK_POWER(0);
 			//While application is running
 			while( !quit )
@@ -145,7 +149,7 @@ int main( int argc, char* args[] )
                     //DUCK_POWER.test();
 
 				}
-                    m.Map_mode(e,DUCK_POWER);
+                    g.Map_mode(e,DUCK);
                     //DUCK_POWER.battle(e,quit);
                     //SDL_RenderPresent( gRenderer );
 			}
