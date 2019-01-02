@@ -43,6 +43,8 @@
 			<Add option="-lmingw32 -lSDL2main -lSDL2 -lSDL2_image" />
 			<Add directory="C:/Program Files (x86)/SDL2/i686-w64-mingw32/lib" />
 		</Linker>
+		<Unit filename="../DuckPower/STORE_BUTTON.h" />
+		<Unit filename="STORE_BUTTON.cpp" />
 		<Unit filename="include/BATTLE_SCENE.h" />
 		<Unit filename="include/BUTTON.h" />
 		<Unit filename="include/LButton.h" />

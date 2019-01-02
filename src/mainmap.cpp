@@ -1,5 +1,5 @@
 #include "mainmap.h"
-#include "iostream"
+
 
 mainmap::mainmap()
 {
@@ -15,7 +15,6 @@ void mainmap::set_value(int x,int y,int z){
 }
 
 void mainmap::map_but(SDL_Event &a,LTexture &l,LButton &b,int &mode){
-    //std::cout<<l_x<<" "<<l_y<<'\n';
     b.handleEvent(&a);
     b.setPosition(l_x,l_y);
     b.setdim(l.mWidth,l.mHeight);
