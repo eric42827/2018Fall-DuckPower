@@ -3,20 +3,34 @@
 #include <SDL2/SDL.h>
 #include<BATTLE_SCENE.h>
 #include<mainmap.h>
+#include<Change_scene.h>
 #include<iostream>
 #define map_num 1
-#define icon_num 13
-#define menu_num 6
+#define icon_num 14
+#define menu_num 4
+#define scene_num 1
+#define tutor_num 1
+#define about_num 1
+#define SCREEN_WIDTH 1280
+#define SCREEN_HEIGHT 640
 const std::string menu_image[menu_num]={
-        "image/menu/story1.png",
+        "image/menu/story.png",
         "image/menu/tutorial.png",
-        "image/menu/setting.png",
+        //"image/menu/setting.png",
         "image/menu/about.png",
-        "image/menu/main4.png",
         "image/menu/title2.png",
+};
+const std::string scene_image[scene_num]={
+        "image/menu/main4.png",
 };
 const std::string map_image[map_num]={
         "image/map/land.png",
+};
+const std::string tutor_image[tutor_num]={
+        "image/map/bigmap640f.png",
+};
+const std::string about_image[about_num]={
+        "image/menu/about1.png",
 };
 const std::string icon_image[icon_num]={
         "image/map/icon1.png",
@@ -31,20 +45,17 @@ const std::string icon_image[icon_num]={
         "image/map/icon10.png",
         "image/map/icon11.png",
         "image/map/icon12.png",
-        "image/map/return.png"
+        "image/map/skip1.png",
+        "image/map/return1.png"
 };
 enum menu_name{
-    background=4,
-    title=5,
+    //background=3,
+    title=3,
 
 
 };
 enum map_name{
     bigmap=0,
-    island_1=1,
-    island_2=2,
-    island_3=3,
-    island_4=4,
 };
 enum icon_name{
     icon1=0,
@@ -59,40 +70,44 @@ enum icon_name{
     icon10=9,
     icon11=10,
     icon12=11,
-    goback=12
+    goback=12,
+    gomenu=13
 };
 const int iconx[12]={160,140,300,410,610,800,900,1040,1130,1025,920,610};
 const int icony[12]={110,220,480,390,420,450,350,300,200,100,150,165};
-const int menuy[4]={182,300,400,500};
+const int menuy[3]={300,400,500};
 const int iconm[12]={2,2,2,2,2,2,2,2,2,2,2,2};
-const int menum[4]={1,1,1,1};
+const int menum[3]={1,11,12};
 class Map
 {
 
     public:
-
+        bool quit;
         Map();
         virtual ~Map();
         void Map_ini();
-        void Map_mode(SDL_Event &e,BATTLE_SCENE **b){
+        void Map_mode(SDL_Event &e,BATTLE_SCENE **b,bool &quit){
             switch(mode){
                 case 0:
-                    --scrollingOffset;
-                    if( scrollingOffset < -menu[background].getWidth()){std::cout<<scrollingOffset;
-                        scrollingOffset = 0;
-                    }
+                    //menu[background].scro
+                    /*--scrollingOffset;
+                    if( scrollingOffset < -menu[background].getWidth())scrollingOffset = 0;
                     menu[background].render(scrollingOffset,0);
-                    menu[background].render( scrollingOffset + menu[background].getWidth(), 0 );
+                    menu[background].render(scrollingOffset + menu[background].getWidth(),0);
+                    */
+                    scene[0].scroll(1,0,1);
                     menu[title].render(0,0);
-                    for(int i=0;i<menu_num-2;i++){
+                    for(int i=0;i<menu_num-1;i++){
                         menub[i].menu_but(e,menu[i],menu_button[i],mode);
+                        if(mode){SDL_Delay(200);break;}
                     }
 
                     SDL_RenderPresent( gRenderer );
                     break;
                 case 1:
                     map[bigmap].render(0,0);
-                    for(int i=0;i<icon_num-1;i++){
+                    iconb[gomenu].map_but(e,icon[gomenu],map_button[gomenu],mode);
+                    for(int i=0;i<icon_num-2;i++){
                         if(judge[i]){//judge whether this stage is played or not
                             icon[i].setAlpha(255);
                             iconb[i].map_but(e,icon[i],map_button[i],mode);//press to change mode
@@ -115,22 +130,36 @@ class Map
                     }
                     SDL_RenderPresent( gRenderer );
                     break;
-                case 2:
-                    //std::cout<<now+2;
-
+                case 2://each stage
                     b[now][0].battle(e,mode);
                     iconb[goback].map_but(e,icon[goback],map_button[goback],mode);
                     if(mode==1){
                         check=1;
+                        iconb[now].clean=0;
+                        //std::cout<<iconb[now].clean<<now;
+                        //delete[]b[now];
                         now++;
+                        if(now==12){
+                                quit = true;
+                                break;
+                        }
                     }
                     SDL_RenderPresent( gRenderer );
                     break;
+
+                case 11://tutorial
+                    tutor[0].render(0,0);
+                    iconb[gomenu].map_but(e,icon[gomenu],map_button[gomenu],mode);
+                    SDL_RenderPresent( gRenderer );
+                    break;
+                case 12://about
+                    about[0].scroll(0,1,0);
+                    iconb[gomenu].map_but(e,icon[gomenu],map_button[gomenu],mode);
+                    SDL_RenderPresent( gRenderer );
+                    break;
             }
+            return;
         }
-
-
-
 
     protected:
 
@@ -142,8 +171,11 @@ class Map
         mainmap iconb[icon_num];//mix button and pic
         /*********menu*******/
         LTexture menu[menu_num];
-        LButton menu_button[menu_num-2];
-        mainmap menub[menu_num-2];
+        LButton menu_button[menu_num-1];
+        mainmap menub[menu_num-1];
+        Change_scene scene[scene_num];
+        LTexture tutor[tutor_num];
+        Change_scene about[about_num];
         /*********other declaration*******/
         void load();
         bool judge[12]={1,0,0,0,0,0,0,0,0,0,0,0};
@@ -151,7 +183,8 @@ class Map
         int a=1;
         int now=0;
         int check =0;//jugde which stage is complete
-        int scrollingOffset = 0;
+        //int scrollingOffset = 0;
+
 
 
 };

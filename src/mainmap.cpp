@@ -10,15 +10,17 @@ mainmap::~mainmap()
 {
     //dtor
 }
+
 void mainmap::set_value(int x,int y,int z){
     l_x=x;l_y=y;k=z;
 }
 
 void mainmap::map_but(SDL_Event &a,LTexture &l,LButton &b,int &mode){
     //std::cout<<l_x<<" "<<l_y<<'\n';
-    b.handleEvent(&a);
-    b.setPosition(l_x,l_y);
-    b.setdim(l.mWidth,l.mHeight);
+    if(clean){
+        b.handleEvent(&a);
+        b.setPosition(l_x,l_y);
+        b.setdim(l.mWidth,l.mHeight);
         if(b.get_sprite()==BUTTON_SPRITE_MOUSE_OVER_MOTION){
             l.render(l_x,l_y);
             //printf("correct");
@@ -29,6 +31,8 @@ void mainmap::map_but(SDL_Event &a,LTexture &l,LButton &b,int &mode){
             return;
         }
         else l.render(l_x,l_y,0.9,0.9);
+    }else {l.setColor(100,100,100);l.render(l_x,l_y);}
+
 
 return;
             //SDL_RenderPresent( gRenderer );

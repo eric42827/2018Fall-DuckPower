@@ -18,28 +18,15 @@
 #define N 40
 #define sol_num 6
 #define tar_num 60
-
 /********Objects Declaration********/
 //The window we'll be rendering to
 SDL_Window* gWindow = NULL;
 //BATTLE_SCENE DUCK_POWER;
-
-/********Function Declaration********/
-
-
-//Starts up SDL and creates window
-bool init();/***no need***/
-
-//Loads media
-
-
 /********Function Explanation********/
-
 bool init()
 {
 	//Initialization flag
 	bool success = true;
-
 	//Initialize SDL
 	if( SDL_Init( SDL_INIT_VIDEO ) < 0 )
 	{
@@ -53,7 +40,6 @@ bool init()
 		{
 			printf( "Warning: Linear texture filtering not enabled!" );
 		}
-
 		//Create window
 		gWindow = SDL_CreateWindow( "SDL Tutorial", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN );
 		if( gWindow == NULL )
@@ -74,7 +60,6 @@ bool init()
 			{
 				//Initialize renderer color
 				SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
-
 				//Initialize PNG loading
 				int imgFlags = IMG_INIT_PNG;
 				if( !( IMG_Init( imgFlags ) & imgFlags ) )
@@ -85,7 +70,6 @@ bool init()
 			}
 		}
 	}
-
 	return success;
 }
 
@@ -97,7 +81,6 @@ void close()
 	SDL_DestroyWindow( gWindow );
 	gWindow = NULL;
 	gRenderer = NULL;
-
 	//Quit SDL subsystems
 	IMG_Quit();
 	SDL_Quit();
@@ -114,29 +97,19 @@ int main( int argc, char* args[] )
 	else
 	{
 	    //DUCK_POWER.load();
-
-
 			//Main loop flag
-			bool quit = false;
+			static bool quit = false;
             g.Map_ini();
 			//Event handler
 			SDL_Event e;
-
 			//Current animation frame
 			int frame = 0;
-
             //initialization
             BATTLE_SCENE **DUCK=new BATTLE_SCENE* [12];
             //for(int i=0;i<12;i++)DUCK[i]=new BATTLE_SCENE(0);
-            //DUCK[0]=new BATTLE_SCENE(0);
-            //DUCK[1]=new BATTLE_SCENE(0);
-            //{BATTLE_SCENE *temp=new BATTLE_SCENE(0);DUCK+i=temp;}//delete[]temp;}
-
-            //BATTLE_SCENE DUCK_POWER(0);
 			//While application is running
 			while( !quit )
 			{
-
 				//Handle events on queue
 				while( SDL_PollEvent( &e ) != 0 )
 				{
@@ -145,17 +118,12 @@ int main( int argc, char* args[] )
 					{
 						quit = true;
 					}
-
-                    //DUCK_POWER.test();
-
 				}
-                    g.Map_mode(e,DUCK);
-                    //DUCK_POWER.battle(e,quit);
-                    //SDL_RenderPresent( gRenderer );
+                    g.Map_mode(e,DUCK,quit);
 			}
 
-	//Free resources and close SDL
-	close();
+        //Free resources and close SDL
+        close();
 	}
 	return 0;
 }
