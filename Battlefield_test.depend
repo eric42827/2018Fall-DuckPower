@@ -460,15 +460,15 @@
 1545824429 source:c:\users\user\desktop\duckpower-battlefield\src\map.cpp
 	"Map.h"
 
-1546352402 source:d:\duckpower\src\base.cpp
+1546372026 source:d:\duckpower\src\base.cpp
 	"base.h"
 
-1546352400 d:\duckpower\include\base.h
+1546372026 d:\duckpower\include\base.h
 
-1546406458 source:d:\duckpower\src\battle_scene.cpp
+1546372026 source:d:\duckpower\src\battle_scene.cpp
 	"BATTLE_SCENE.h"
 
-1546429739 d:\duckpower\include\battle_scene.h
+1546432578 d:\duckpower\include\battle_scene.h
 	<iostream>
 	<SDL2/SDL.h>
 	<SDL_image.h>
@@ -485,28 +485,28 @@
 	<stdlib.h>
 	<ctime>
 
-1546352400 d:\duckpower\include\loop.h
+1546372026 d:\duckpower\include\loop.h
 	<SDL2/SDL.h>
 	<SDL_image.h>
 	<LButton.h>
 	<LTexture.h>
 	<base.h>
 
-1546352400 d:\duckpower\include\lbutton.h
+1546372026 d:\duckpower\include\lbutton.h
 	<SDL2/SDL.h>
 	<SDL_image.h>
 	<stdio.h>
 	<string>
 	<cmath>
 
-1546352400 d:\duckpower\include\ltexture.h
+1546372026 d:\duckpower\include\ltexture.h
 	<SDL2/SDL.h>
 	<SDL_image.h>
 	<stdio.h>
 	<string>
 	<cmath>
 
-1546412070 d:\duckpower\include\men_with_arms.h
+1546372026 d:\duckpower\include\men_with_arms.h
 	<stdio.h>
 	<iostream>
 	<SDL2/SDL.h>
@@ -518,27 +518,27 @@
 	<base.h>
 	<ctime>
 
-1546313938 source:d:\duckpower\src\button.cpp
+1546372026 source:d:\duckpower\src\button.cpp
 	"BUTTON.h"
 
-1546313938 d:\duckpower\include\button.h
+1546372026 d:\duckpower\include\button.h
 	<LTexture.h>
 	<LButton.h>
 
-1546352402 source:d:\duckpower\src\lbutton.cpp
+1546372026 source:d:\duckpower\src\lbutton.cpp
 	"LButton.h"
 
-1546352402 source:d:\duckpower\src\loop.cpp
+1546372026 source:d:\duckpower\src\loop.cpp
 	"loop.h"
 
-1546352402 source:d:\duckpower\src\ltexture.cpp
+1546372026 source:d:\duckpower\src\ltexture.cpp
 	"LTexture.h"
 
-1546419146 source:d:\duckpower\src\mainmap.cpp
+1546432578 source:d:\duckpower\src\mainmap.cpp
 	"mainmap.h"
 	"iostream"
 
-1546419330 d:\duckpower\include\mainmap.h
+1546432578 d:\duckpower\include\mainmap.h
 	<SDL2/SDL.h>
 	<SDL_image.h>
 	<stdio.h>
@@ -547,19 +547,19 @@
 	<LTexture.h>
 	<LButton.h>
 
-1546429925 source:d:\duckpower\src\map.cpp
+1546432578 source:d:\duckpower\src\map.cpp
 	"Map.h"
 
-1546430066 d:\duckpower\include\map.h
+1546432578 d:\duckpower\include\map.h
 	<SDL2/SDL.h>
 	<BATTLE_SCENE.h>
 	<mainmap.h>
 	<iostream>
 
-1546334952 source:d:\duckpower\src\men_with_arms.cpp
+1546372026 source:d:\duckpower\src\men_with_arms.cpp
 	"men_with_arms.h"
 
-1546427906 source:d:\duckpower\main.cpp
+1546432578 source:d:\duckpower\main.cpp
 	<SDL2/SDL.h>
 	<SDL_image.h>
 	<stdio.h>
