@@ -3,6 +3,7 @@
 #include <SDL2/SDL.h>
 #include<BATTLE_SCENE.h>
 #include<mainmap.h>
+#include<iostream>
 #define map_num 1
 #define icon_num 13
 #define menu_num 6
@@ -96,16 +97,16 @@ class Map
                             icon[i].setAlpha(255);
                             iconb[i].map_but(e,icon[i],map_button[i],mode);//press to change mode
                             if(mode!=1){
+                                    b[now]=new BATTLE_SCENE(0);
                                     SDL_Delay(200);break;
-                                SDL_Delay(200);
-                                break;
                             }
                         }
                     }
                     if(check){
                         judge[a]=1;
                         for(int t=0;t<=100;t++){
-                            icon[a].setAlpha(t*2.55);
+                            icon[a].setAlpha(t);
+                            SDL_Delay(2);
                             icon[a].render(iconx[a],icony[a],0.9,0.9);
                             SDL_RenderPresent( gRenderer );
                         }
@@ -115,9 +116,14 @@ class Map
                     SDL_RenderPresent( gRenderer );
                     break;
                 case 2:
+                    //std::cout<<now+2;
+
                     b[now][0].battle(e,mode);
                     iconb[goback].map_but(e,icon[goback],map_button[goback],mode);
-                    if(mode==1){check=1;now++;}
+                    if(mode==1){
+                        check=1;
+                        now++;
+                    }
                     SDL_RenderPresent( gRenderer );
                     break;
             }

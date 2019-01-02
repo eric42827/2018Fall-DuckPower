@@ -127,12 +127,12 @@ int main( int argc, char* args[] )
 
             //initialization
             BATTLE_SCENE **DUCK=new BATTLE_SCENE* [12];
-            for(int i=0;i<12;i++)DUCK[i]=new BATTLE_SCENE(0);
+            //for(int i=0;i<12;i++)DUCK[i]=new BATTLE_SCENE(0);
             //DUCK[0]=new BATTLE_SCENE(0);
             //DUCK[1]=new BATTLE_SCENE(0);
             //{BATTLE_SCENE *temp=new BATTLE_SCENE(0);DUCK+i=temp;}//delete[]temp;}
 
-            BATTLE_SCENE DUCK_POWER(0);
+            //BATTLE_SCENE DUCK_POWER(0);
 			//While application is running
 			while( !quit )
 			{

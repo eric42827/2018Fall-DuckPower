@@ -108,11 +108,11 @@ class BATTLE_SCENE
                 //victory judge
                 if(victory_judge(tiles,sacred_right)){
                         scene_image[victory].render(SCREEN_WIDTH/2-scene_image[victory].getWidth()/2,SCREEN_HEIGHT/2-scene_image[victory].getHeight()/2);
-                        mode=true;
+                        mode=1;
                 }
                 if(victory_judge(tiles,sacred_left)){
                         scene_image[defeat].render(SCREEN_WIDTH/2-scene_image[victory].getWidth()/2,SCREEN_HEIGHT/2-scene_image[victory].getHeight()/2);
-                        mode=true;
+                        mode=1;
                 }
                 static bool start=0;
                 if(turn==MY){
