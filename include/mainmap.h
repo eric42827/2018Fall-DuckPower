@@ -8,7 +8,7 @@
 #include<LTexture.h>
 #include<LButton.h>
 
-class mainmap
+class mainmap //:public LTexture,public LButton
 {
     public:
         friend class Map;

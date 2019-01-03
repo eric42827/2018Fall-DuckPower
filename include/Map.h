@@ -1,38 +1,37 @@
 #ifndef MAP_H
 #define MAP_H
 #include <SDL2/SDL.h>
-#include<BATTLE_SCENE.h>
-#include<mainmap.h>
-#include<Change_scene.h>
-#include<iostream>
-#define map_num 1
-#define icon_num 14
-#define menu_num 4
-#define scene_num 1
-#define tutor_num 1
-#define about_num 1
-#define SCREEN_WIDTH 1280
-#define SCREEN_HEIGHT 640
-const std::string menu_image[menu_num]={
+#include <BATTLE_SCENE.h>
+#include <mainmap.h>
+#include <Change_scene.h>
+#include <iostream>
+#include "definition.h"
+using namespace std;
+
+const string change_image[change_num]={
+        "image/change/brand.png",
+
+};
+const string menu_image[menu_num]={
         "image/menu/story.png",
         "image/menu/tutorial.png",
         //"image/menu/setting.png",
         "image/menu/about.png",
-        "image/menu/title2.png",
+        "image/menu/title3.png",
 };
-const std::string scene_image[scene_num]={
+const string scene_image[scene_num]={
         "image/menu/main4.png",
 };
-const std::string map_image[map_num]={
+const string map_image[map_num]={
         "image/map/land.png",
 };
-const std::string tutor_image[tutor_num]={
+const string tutor_image[tutor_num]={
         "image/map/bigmap640f.png",
 };
-const std::string about_image[about_num]={
-        "image/menu/about1.png",
+const string about_image[about_num]={
+        "image/menu/about2.png",
 };
-const std::string icon_image[icon_num]={
+const string icon_image[icon_num]={
         "image/map/icon1.png",
         "image/map/icon2.png",
         "image/map/icon3.png",
@@ -88,6 +87,7 @@ class Map
         void Map_ini();
         void Map_mode(SDL_Event &e,BATTLE_SCENE **b,bool &quit){
             switch(mode){
+
                 case 0:
                     //menu[background].scro
                     /*--scrollingOffset;
@@ -96,7 +96,7 @@ class Map
                     menu[background].render(scrollingOffset + menu[background].getWidth(),0);
                     */
                     scene[0].scroll(1,0,1);
-                    menu[title].render(0,0);
+                    menu[title].render(340,25);
                     for(int i=0;i<menu_num-1;i++){
                         menub[i].menu_but(e,menu[i],menu_button[i],mode);
                         if(mode){SDL_Delay(200);break;}
@@ -173,7 +173,8 @@ class Map
         LTexture menu[menu_num];
         LButton menu_button[menu_num-1];
         mainmap menub[menu_num-1];
-        Change_scene scene[scene_num];
+
+        Change_scene scene[scene_num];//scrolling background
         LTexture tutor[tutor_num];
         Change_scene about[about_num];
         /*********other declaration*******/
