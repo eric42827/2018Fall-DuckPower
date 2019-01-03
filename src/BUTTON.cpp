@@ -2,10 +2,10 @@
 
 BUTTON::BUTTON()
 {
-    //ctor
+
 }
 
 BUTTON::~BUTTON()
 {
-    //dtor
+
 }

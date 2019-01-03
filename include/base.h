@@ -1,8 +1,7 @@
 #ifndef BASE_H
 #define BASE_H
+#include "definition.h"
 //screen dimensions defined here
-#define SCREEN_WIDTH 1280
-#define SCREEN_HEIGHT 640
 
 //some important lengths used to adjust the positions of figures
  const double x_dis=108.0;
@@ -34,22 +33,16 @@ class base
         int Monte;//
 
         //set x,y
-        void set_xy(int a,int b){
-            x=a;y=b;
-        }
+        void set_xy(int a,int b);
 
         //set pos
-        void setpos(int a){pos=a;}
+        void setpos(int a);
 
         //set soldier_num
-        void setsoldier_num(int a){soldier_num=a;}
-
+        void setsoldier_num(int a);
 
         //set Monte
-        void set_Monte(int a){
-            Monte=a;
-        }
-
+        void set_Monte(int a);
 
 };
 

@@ -16,12 +16,14 @@
 #include <BATTLE_SCENE.h>
 #include "definition.h"
 #include "initial.h"
+Map m;
+int get_mode();
 
 int main( int argc, char* args[] )
 {
 	//Start up SDL and create window
 	initial i;
-	Map m;
+
 	if( !i.init() )
 	{
 		printf( "Failed to initialize!\n" );
@@ -55,4 +57,8 @@ int main( int argc, char* args[] )
         i.close();
 	}
 	return 0;
+}
+
+int get_mode(){
+    return m.mode;
 }

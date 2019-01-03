@@ -50,6 +50,8 @@
 		<Unit filename="include/LTexture.h" />
 		<Unit filename="include/Map.h" />
 		<Unit filename="include/base.h" />
+		<Unit filename="include/definition.h" />
+		<Unit filename="include/initial.h" />
 		<Unit filename="include/loop.h" />
 		<Unit filename="include/mainmap.h" />
 		<Unit filename="include/men_with_arms.h" />
@@ -61,6 +63,7 @@
 		<Unit filename="src/LTexture.cpp" />
 		<Unit filename="src/Map.cpp" />
 		<Unit filename="src/base.cpp" />
+		<Unit filename="src/initial.cpp" />
 		<Unit filename="src/loop.cpp" />
 		<Unit filename="src/mainmap.cpp" />
 		<Unit filename="src/men_with_arms.cpp" />

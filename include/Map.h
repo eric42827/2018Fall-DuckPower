@@ -32,7 +32,7 @@ const string tutor_image[tutor_num]={
 const string about_image[about_num]={
         "image/menu/about2.png",
 };
-const string icon_image[icon_num]={
+const string icon_image[icon_n]={
         "image/map/icon1.png",
         "image/map/icon2.png",
         "image/map/icon3.png",
@@ -46,7 +46,7 @@ const string icon_image[icon_num]={
         "image/map/icon11.png",
         "image/map/icon12.png",
         "image/map/skip1.png",
-        "image/map/return1.png"
+        "image/map/return1.png",
 };
 enum menu_name{
 
@@ -71,7 +71,6 @@ enum icon_name{
     icon12=11,
     goback=12,
     gomenu=13
-
 };
 const int iconx[12]={160,140,300,410,610,800,900,1040,1130,1025,920,610};
 const int icony[12]={110,220,480,390,420,450,350,300,200,100,150,165};
@@ -88,7 +87,6 @@ class Map
         void Map_ini();
         void Map_mode(SDL_Event &e,BATTLE_SCENE **b,bool &quit){
             switch(mode){
-
                 case 0:
                     //menu[background].scro
                     /*--scrollingOffset;
@@ -108,12 +106,12 @@ class Map
                 case 1:
                     map[bigmap].render(0,0);
                     icon[gomenu].map_but(e,mode);
-                    for(int i=0;i<icon_num-2;i++){
+                    for(int i=0;i<icon_n-2;i++){
                         if(judge[i]){//judge whether this stage is played or not
                             icon[i].setAlpha(255);
                             icon[i].map_but(e,mode);//press to change mode
                             if(mode!=1){
-                                    b[now]=new BATTLE_SCENE(0);
+                                    b[now]=new BATTLE_SCENE(now);
                                     SDL_Delay(200);break;
                             }
                         }
@@ -161,13 +159,11 @@ class Map
             }
             return;
         }
-
-    protected:
-
+        int mode=0;
     private:
         /**********mainmap*********/
         LTexture map[map_num];//bigmap
-        mainmap icon[icon_num];//mix button and pic
+        mainmap icon[icon_n];//mix button and pic
         /*********menu*******/
         mainmap menu[menu_num];
         Change_scene scene[scene_num];//scrolling background
@@ -177,10 +173,10 @@ class Map
         /*********other declaration*******/
         void load();
         bool judge[12]={1,0,0,0,0,0,0,0,0,0,0,0};
-        int mode = 0;
+
         int a=1;
         int now=0;
-        int check =0;//jugde which stage is complete
+        int check=0;//jugde which stage is complete
         //int scrollingOffset = 0;
 
 
