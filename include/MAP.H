@@ -6,8 +6,13 @@
 #include <Change_scene.h>
 #include <iostream>
 #include "definition.h"
+#include "music.h"
 using namespace std;
 
+const string music_name[MUSIC]={
+        "music/maple.mp3",
+
+};
 const string change_image[change_num]={
         "image/change/brand.png",
 
@@ -17,7 +22,6 @@ const string menu_image[menu_num]={
         "image/menu/tutorial.png",
         //"image/menu/setting.png",
         "image/menu/about.png",
-        //"image/menu/title3.png",
 };
 const string scene_image[scene_num]={//menu background(scroll)
         "image/menu/main4.png",
@@ -77,6 +81,7 @@ const int icony[12]={110,220,480,390,420,450,350,300,200,100,150,165};
 const int menuy[3]={300,400,500};
 const int iconm[12]={2,2,2,2,2,2,2,2,2,2,2,2};
 const int menum[3]={1,11,12};
+
 class Map
 {
 
@@ -84,26 +89,24 @@ class Map
         bool quit;
         Map();
         virtual ~Map();
+        friend int get_mode();
         void Map_ini();
         void Map_mode(SDL_Event &e,BATTLE_SCENE **b,bool &quit){
             switch(mode){
+                //if(mode==0)menumusic.playmusic();
                 case 0:
-                    //menu[background].scro
-                    /*--scrollingOffset;
-                    if( scrollingOffset < -menu[background].getWidth())scrollingOffset = 0;
-                    menu[background].render(scrollingOffset,0);
-                    menu[background].render(scrollingOffset + menu[background].getWidth(),0);
-                    */
+                    menumusic.playmusic();
                     scene[0].scroll(1,0,1);
                     map[title].render(340,25);
+
                     for(int i=0;i<menu_num;i++){
                         menu[i].menu_but(e,mode);
-                        if(mode){SDL_Delay(200);break;}
+                        if(mode){SDL_Delay(200);menumusic.paucemusic();break;}
                     }
-
                     SDL_RenderPresent( gRenderer );
                     break;
                 case 1:
+
                     map[bigmap].render(0,0);
                     icon[gomenu].map_but(e,mode);
                     for(int i=0;i<icon_n-2;i++){
@@ -130,6 +133,7 @@ class Map
                     SDL_RenderPresent( gRenderer );
                     break;
                 case 2://each stage
+
                     b[now][0].battle(e,mode);
                     icon[goback].map_but(e,mode);
                     if(mode==1){
@@ -144,8 +148,8 @@ class Map
                     }
                     SDL_RenderPresent( gRenderer );
                     break;
-
                 case 11://tutorial
+                    //menumusic.playmusic();
                     tutor[0].render(0,0);
                     icon[gomenu].map_but(e,mode);
                     SDL_RenderPresent( gRenderer );
@@ -156,12 +160,14 @@ class Map
                     if(mode==0)about[0].offsety=0;
                     SDL_RenderPresent( gRenderer );
                     break;
+
             }
             return;
         }
-        int mode=0;
+
     private:
         /**********mainmap*********/
+
         LTexture map[map_num];//bigmap
         mainmap icon[icon_n];//mix button and pic
         /*********menu*******/
@@ -170,14 +176,14 @@ class Map
         LTexture tutor[tutor_num];
         Change_scene about[about_num];
         Change_scene change[change_num];
+        music menumusic;
         /*********other declaration*******/
         void load();
         bool judge[12]={1,0,0,0,0,0,0,0,0,0,0,0};
-
         int a=1;
         int now=0;
         int check=0;//jugde which stage is complete
-        //int scrollingOffset = 0;
+        int mode=0;
 
 
 

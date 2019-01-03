@@ -1,9 +1,10 @@
 #ifndef INITIAL_H
 #define INITIAL_H
+#include "stdio.h"
 #include "SDL2/SDL.h"
-#include <SDL_image.h>
+#include "SDL_image.h"
 #include "definition.h"
-#include <stdio.h>
+#include "SDL_mixer.h"
 extern SDL_Renderer* gRenderer;
 class initial
 {
@@ -57,6 +58,11 @@ class initial
                     if( !( IMG_Init( imgFlags ) & imgFlags ) )
                     {
                         printf( "SDL_image could not initialize! SDL_image Error: %s\n", IMG_GetError() );
+                        success = false;
+                    }
+                    if( Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 2048 ) < 0 )
+                    {
+                        printf( "SDL_mixer could not initialize! SDL_mixer Error: %s\n", Mix_GetError() );
                         success = false;
                     }
                 }

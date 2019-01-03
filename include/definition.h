@@ -15,7 +15,7 @@
 #define tutor_num 1
 #define about_num 1
 #define icon_n 14
-
+#define MUSIC 1
 
 
 
