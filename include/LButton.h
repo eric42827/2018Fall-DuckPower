@@ -85,13 +85,6 @@ class LButton
             }
             }
         }
-        void render(int x,int y)
-        {
-            //Show current button sprite
-
-            //else if(mCurrentSprite==BUTTON_SPRITE_MOUSE_DOWN)
-            //gButtonSpriteSheetTexture.render( mPosition.x, mPosition.y, &gSpriteClips[ mCurrentSprite ] );
-        }
 
         int getwidth(){return BUTTON_WIDTH;}
 		int getheight(){return BUTTON_HEIGHT;}

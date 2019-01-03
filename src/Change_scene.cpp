@@ -13,8 +13,6 @@ Change_scene::~Change_scene()
 }
 
 void Change_scene:: scroll(bool x,bool y,bool inf){
-    static int offsetx=0;
-    static int offsety=0;
     //std::cout<<inf;
     if(x){
         --offsetx;

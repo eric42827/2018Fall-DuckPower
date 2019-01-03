@@ -8,13 +8,16 @@
 #define tar_num 60
 
 /*****Map.h*****/
-#define map_num 1
-#define icon_num 14
-#define menu_num 4
+#define change_num 1
+#define menu_num 3
 #define scene_num 1
+#define map_num 2
 #define tutor_num 1
 #define about_num 1
-#define change_num 2
+#define icon_num 14
+
+
+
 
 
 #endif // DEFINITION_H

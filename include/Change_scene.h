@@ -11,6 +11,8 @@ class Change_scene:protected LTexture
     protected:
 
     private:
+        int offsetx=0;
+        int offsety=0;
         void scroll(bool x,bool y,bool inf);
 };
 

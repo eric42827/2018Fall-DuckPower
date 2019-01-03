@@ -8,7 +8,7 @@
 #include<LTexture.h>
 #include<LButton.h>
 
-class mainmap //:public LTexture,public LButton
+class mainmap :public LTexture,public LButton
 {
     public:
         friend class Map;
@@ -22,22 +22,22 @@ class mainmap //:public LTexture,public LButton
         int l_x,l_y,k;
         bool clean =true;
         //int map_but(SDL_Event &,LTexture &,LButton &);
-        void scroll(bool x,bool y,bool inf,LTexture &l);
+        //void scroll(bool x,bool y,bool inf,LTexture &l);
         void set_value(int,int,int);
-        void map_but(SDL_Event &a,LTexture &l,LButton &b,int &mode);
-        void menu_but(SDL_Event &a,LTexture &l,LButton &b,int &mode){
-            b.handleEvent(&a);
-            b.setPosition(l_x,l_y);
-            b.setdim(l.mWidth,l.mHeight);
-                if(b.get_sprite()==BUTTON_SPRITE_MOUSE_OVER_MOTION){
-                    l.setColor(255,255,100);
-                    l.render(l_x,l_y);
+        void map_but(SDL_Event &a,int &mode);
+        void menu_but(SDL_Event &a,int &mode){
+            handleEvent(&a);
+            setPosition(l_x,l_y);
+            setdim(mWidth,mHeight);
+                if(get_sprite()==BUTTON_SPRITE_MOUSE_OVER_MOTION){
+                    setColor(255,255,100);
+                    render(l_x,l_y);
                 }
-                else if(b.get_sprite()==BUTTON_SPRITE_MOUSE_DOWN){
+                else if(get_sprite()==BUTTON_SPRITE_MOUSE_DOWN){
                     mode=k;
                     return;
                 }
-                else {l.setColor(255,255,255);l.render(l_x,l_y);}
+                else {setColor(255,255,255);render(l_x,l_y);}
             return;
         }
 

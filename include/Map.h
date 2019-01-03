@@ -17,13 +17,14 @@ const string menu_image[menu_num]={
         "image/menu/tutorial.png",
         //"image/menu/setting.png",
         "image/menu/about.png",
-        "image/menu/title3.png",
+        //"image/menu/title3.png",
 };
-const string scene_image[scene_num]={
+const string scene_image[scene_num]={//menu background(scroll)
         "image/menu/main4.png",
 };
 const string map_image[map_num]={
         "image/map/land.png",
+        "image/menu/title3.png",
 };
 const string tutor_image[tutor_num]={
         "image/map/bigmap640f.png",
@@ -48,13 +49,12 @@ const string icon_image[icon_num]={
         "image/map/return1.png"
 };
 enum menu_name{
-    //background=3,
-    title=3,
-
 
 };
 enum map_name{
     bigmap=0,
+    title=1,
+
 };
 enum icon_name{
     icon1=0,
@@ -71,6 +71,7 @@ enum icon_name{
     icon12=11,
     goback=12,
     gomenu=13
+
 };
 const int iconx[12]={160,140,300,410,610,800,900,1040,1130,1025,920,610};
 const int icony[12]={110,220,480,390,420,450,350,300,200,100,150,165};
@@ -96,9 +97,9 @@ class Map
                     menu[background].render(scrollingOffset + menu[background].getWidth(),0);
                     */
                     scene[0].scroll(1,0,1);
-                    menu[title].render(340,25);
-                    for(int i=0;i<menu_num-1;i++){
-                        menub[i].menu_but(e,menu[i],menu_button[i],mode);
+                    map[title].render(340,25);
+                    for(int i=0;i<menu_num;i++){
+                        menu[i].menu_but(e,mode);
                         if(mode){SDL_Delay(200);break;}
                     }
 
@@ -106,11 +107,11 @@ class Map
                     break;
                 case 1:
                     map[bigmap].render(0,0);
-                    iconb[gomenu].map_but(e,icon[gomenu],map_button[gomenu],mode);
+                    icon[gomenu].map_but(e,mode);
                     for(int i=0;i<icon_num-2;i++){
                         if(judge[i]){//judge whether this stage is played or not
                             icon[i].setAlpha(255);
-                            iconb[i].map_but(e,icon[i],map_button[i],mode);//press to change mode
+                            icon[i].map_but(e,mode);//press to change mode
                             if(mode!=1){
                                     b[now]=new BATTLE_SCENE(0);
                                     SDL_Delay(200);break;
@@ -132,11 +133,10 @@ class Map
                     break;
                 case 2://each stage
                     b[now][0].battle(e,mode);
-                    iconb[goback].map_but(e,icon[goback],map_button[goback],mode);
+                    icon[goback].map_but(e,mode);
                     if(mode==1){
                         check=1;
-                        iconb[now].clean=0;
-                        //std::cout<<iconb[now].clean<<now;
+                        icon[now].clean=0;
                         //delete[]b[now];
                         now++;
                         if(now==12){
@@ -149,12 +149,13 @@ class Map
 
                 case 11://tutorial
                     tutor[0].render(0,0);
-                    iconb[gomenu].map_but(e,icon[gomenu],map_button[gomenu],mode);
+                    icon[gomenu].map_but(e,mode);
                     SDL_RenderPresent( gRenderer );
                     break;
                 case 12://about
                     about[0].scroll(0,1,0);
-                    iconb[gomenu].map_but(e,icon[gomenu],map_button[gomenu],mode);
+                    icon[gomenu].map_but(e,mode);
+                    if(mode==0)about[0].offsety=0;
                     SDL_RenderPresent( gRenderer );
                     break;
             }
@@ -166,17 +167,13 @@ class Map
     private:
         /**********mainmap*********/
         LTexture map[map_num];//bigmap
-        LTexture icon[icon_num];//pics
-        LButton map_button[icon_num];//button
-        mainmap iconb[icon_num];//mix button and pic
+        mainmap icon[icon_num];//mix button and pic
         /*********menu*******/
-        LTexture menu[menu_num];
-        LButton menu_button[menu_num-1];
-        mainmap menub[menu_num-1];
-
+        mainmap menu[menu_num];
         Change_scene scene[scene_num];//scrolling background
         LTexture tutor[tutor_num];
         Change_scene about[about_num];
+        Change_scene change[change_num];
         /*********other declaration*******/
         void load();
         bool judge[12]={1,0,0,0,0,0,0,0,0,0,0,0};
