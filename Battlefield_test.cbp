@@ -55,6 +55,7 @@
 		<Unit filename="include/loop.h" />
 		<Unit filename="include/mainmap.h" />
 		<Unit filename="include/men_with_arms.h" />
+		<Unit filename="include/music.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/BATTLE_SCENE.cpp" />
 		<Unit filename="src/BUTTON.cpp" />
@@ -67,6 +68,7 @@
 		<Unit filename="src/loop.cpp" />
 		<Unit filename="src/mainmap.cpp" />
 		<Unit filename="src/men_with_arms.cpp" />
+		<Unit filename="src/music.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />
