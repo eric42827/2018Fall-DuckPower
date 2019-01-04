@@ -3,4 +3,6 @@
 *.layout
 *.o
 *.exe
-image/map/oldicon/
+image/map/old/
+image/menu/old/
+image/change/old/
