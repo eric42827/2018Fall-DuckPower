@@ -18,7 +18,7 @@ void Map::Map_ini(){
     icon[goback].set_value(SCREEN_WIDTH-203,590,1);
     icon[gomenu].set_value(0,0,0);
     //for(int i=0;i<MUSIC;i++)music
-    menumusic.loadmusic(music_name[0]);
+    for(int i=0;i<MUSIC;i++)bgm[i].loadmusic(music_name[i]);
 }
 
 void Map::load(){//load LTexture&Change

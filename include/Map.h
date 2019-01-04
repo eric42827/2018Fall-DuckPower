@@ -11,6 +11,17 @@ using namespace std;
 
 const string music_name[MUSIC]={
         "music/maple.mp3",
+        "music/village.mp3",
+        "music/battle1.mp3",
+        "music/battle2.mp3",
+        "music/battle3.mp3",
+};
+enum music_enum{
+    maple=0,
+    village=1,
+    battle1=2,
+    battle2=3,
+    battle3=4,
 
 };
 const string change_image[change_num]={
@@ -95,18 +106,18 @@ class Map
             switch(mode){
                 //if(mode==0)menumusic.playmusic();
                 case 0:
-                    menumusic.playmusic();
+                    bgm[maple].playmusic();
                     scene[0].scroll(1,0,1);
                     map[title].render(340,25);
 
                     for(int i=0;i<menu_num;i++){
                         menu[i].menu_but(e,mode);
-                        if(mode){SDL_Delay(200);menumusic.paucemusic();break;}
+                        if(mode){bgm[maple].stopmusic();SDL_Delay(200);break;}
                     }
                     SDL_RenderPresent( gRenderer );
                     break;
                 case 1:
-
+                    bgm[village].playmusic();
                     map[bigmap].render(0,0);
                     icon[gomenu].map_but(e,mode);
                     for(int i=0;i<icon_n-2;i++){
@@ -114,7 +125,8 @@ class Map
                             icon[i].setAlpha(255);
                             icon[i].map_but(e,mode);//press to change mode
                             if(mode!=1){
-                                    b[now]=new BATTLE_SCENE(now);
+                                    b[now]=new BATTLE_SCENE(now%3);
+                                    bgm[village].stopmusic();
                                     SDL_Delay(200);break;
                             }
                         }
@@ -133,14 +145,14 @@ class Map
                     SDL_RenderPresent( gRenderer );
                     break;
                 case 2://each stage
-
+                    bgm[(now)%3+2].playmusic();
                     b[now][0].battle(e,mode);
                     icon[goback].map_but(e,mode);
                     if(mode==1){
                         check=1;
                         icon[now].clean=0;
-                        //delete[]b[now];
                         now++;
+                        bgm[(now)%3+2].stopmusic();
                         if(now==12){
                                 quit = true;
                                 break;
@@ -176,7 +188,7 @@ class Map
         LTexture tutor[tutor_num];
         Change_scene about[about_num];
         Change_scene change[change_num];
-        music menumusic;
+        music bgm[MUSIC];
         /*********other declaration*******/
         void load();
         bool judge[12]={1,0,0,0,0,0,0,0,0,0,0,0};
