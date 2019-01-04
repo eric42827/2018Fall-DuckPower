@@ -8,14 +8,14 @@
 #define tar_num 60
 
 /*****Map.h*****/
-#define change_num 1
 #define menu_num 3
-#define scene_num 1
-#define map_num 2
+#define scene_num 2
+#define map_num 5
 #define tutor_num 1
 #define about_num 1
-#define icon_n 14
-#define MUSIC 5
+#define icon_n 15
+#define MUSIC 7
+#define SOUND 1
 
 
 

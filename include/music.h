@@ -10,6 +10,7 @@ class music
         music();
         virtual ~music();
         friend class Map;
+        friend class mainmap;
     protected:
 
     private:

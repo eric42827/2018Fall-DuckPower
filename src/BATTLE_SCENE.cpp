@@ -364,6 +364,7 @@ void BATTLE_SCENE::buttons_target_show(SDL_Event& e,which_step& step,int& sel,in
             const int pt=soldier[tiles[sel].soldier_num]->getpoint();
             if(pt!=0){
                 count=soldier_view(sel,&e,tiles);
+                if(count!=0){
                 for( int i = 0; i < count; i ++)
                 {
                     if(click==1){
@@ -386,7 +387,9 @@ void BATTLE_SCENE::buttons_target_show(SDL_Event& e,which_step& step,int& sel,in
                             step=SELECT_UNIT;
                         }
                     }
-                }
+                }}
+
+                else step=SELECT_UNIT;
             }
             else{
                 step=SELECT_UNIT;

@@ -1,3 +1,4 @@
+#define _GLIBCXX_USE_CXX11_ABI 0
 #ifndef MAP_H
 #define MAP_H
 #include <SDL2/SDL.h>
@@ -15,6 +16,8 @@ const string music_name[MUSIC]={
         "music/battle1.mp3",
         "music/battle2.mp3",
         "music/battle3.mp3",
+        "music/teacher1.mp3",
+        "music/teacher2.mp3",
 };
 enum music_enum{
     maple=0,
@@ -22,30 +25,33 @@ enum music_enum{
     battle1=2,
     battle2=3,
     battle3=4,
-
+    teacher1=5,
+    teacher2=6,
 };
-const string change_image[change_num]={
-        "image/change/brand.png",
 
-};
+
 const string menu_image[menu_num]={
         "image/menu/story.png",
         "image/menu/tutorial.png",
-        //"image/menu/setting.png",
         "image/menu/about.png",
 };
 const string scene_image[scene_num]={//menu background(scroll)
         "image/menu/main41.png",
+        "image/change/say1.png",
 };
 const string map_image[map_num]={
         "image/map/land.png",
         "image/menu/title3.png",
+        "image/change/black.png",
+        "image/change/brand1.png",
+        "image/menu/version.png",
+
 };
 const string tutor_image[tutor_num]={
         "image/map/bigmap640f.png",
 };
 const string about_image[about_num]={
-        "image/menu/about2.png",
+        "image/menu/about3.png",
 };
 const string icon_image[icon_n]={
         "image/map/icon1.png",
@@ -62,13 +68,20 @@ const string icon_image[icon_n]={
         "image/map/icon12.png",
         "image/map/skip1.png",
         "image/map/return1.png",
+        "image/change/teacher.png",
 };
-enum menu_name{
+enum casemode{
+    start=13,
+};
+enum chan_name{
 
 };
 enum map_name{
     bigmap=0,
     title=1,
+    black=2,
+    brand=3,
+    version=4,
 
 };
 enum icon_name{
@@ -85,21 +98,25 @@ enum icon_name{
     icon11=10,
     icon12=11,
     goback=12,
-    gomenu=13
+    gomenu=13,
+    teacher=14,
 };
-const int iconx[12]={160,140,300,410,610,800,900,1040,1130,1025,920,610};
-const int icony[12]={110,220,480,390,420,450,350,300,200,100,150,165};
+
+const int iconx[icon_n]={160,140,300,410,610,800,900,1040,1130,1025,920,610,SCREEN_WIDTH-203,0,1079};
+const int icony[icon_n]={110,220,480,390,420,450,350,300,200,100,150,165,590,0,388};
 const int menuy[3]={300,400,500};
-const int iconm[12]={2,2,2,2,2,2,2,2,2,2,2,2};
-const int menum[3]={1,11,12};
+const int iconm[icon_n]={2,2,2,2,2,2,2,2,2,2,2,2,1,0,1};
+const int menum[3]={14,11,12};
 
 class Map
 {
 
     public:
-        bool quit;
+
         Map();
         virtual ~Map();
+        bool quit;
+        friend class mainmap;
         friend int get_mode();
         void Map_ini();
         void Map_mode(SDL_Event &e,BATTLE_SCENE **b,bool &quit){
@@ -108,8 +125,8 @@ class Map
                 case 0:
                     bgm[maple].playmusic();
                     scene[0].scroll(1,0,1);
-                    map[title].render(340,25);
-
+                    _map[title].render(340,25);
+                    _map[version].render(1138,613);
                     for(int i=0;i<menu_num;i++){
                         menu[i].menu_but(e,mode);
                         if(mode){bgm[maple].stopmusic();SDL_Delay(200);break;}
@@ -118,9 +135,9 @@ class Map
                     break;
                 case 1:
                     bgm[village].playmusic();
-                    map[bigmap].render(0,0);
+                    _map[bigmap].render(0,0);
                     icon[gomenu].map_but(e,mode);
-                    for(int i=0;i<icon_n-2;i++){
+                    for(int i=0;i<icon_n-3;i++){
                         if(judge[i]){//judge whether this stage is played or not
                             icon[i].setAlpha(255);
                             icon[i].map_but(e,mode);//press to change mode
@@ -172,6 +189,30 @@ class Map
                     if(mode==0)about[0].offsety=0;
                     SDL_RenderPresent( gRenderer );
                     break;
+                case 13:
+                    for(int t=0;t<256;t++){
+                        _map[black].render(0,0);
+                        _map[brand].setAlpha(t);
+                        _map[brand].render(206,270);
+                        t++;
+                        SDL_RenderPresent( gRenderer );
+                    }
+                    for(int t=255;t>0;t--){
+                        _map[black].render(0,0);
+                        _map[brand].setAlpha(t);
+                        _map[brand].render(206,270);
+                        t--;
+                        SDL_RenderPresent( gRenderer );
+                    }
+                    mode=0;
+                    break;
+                case 14:
+                    scene[1].scroll(0,1,0);
+                    bgm[teacher1].playmusic();
+                    icon[teacher].map_but(e,mode);
+                    if(mode!=14)bgm[teacher1].stopmusic();
+                    SDL_RenderPresent( gRenderer );
+
 
             }
             return;
@@ -180,22 +221,23 @@ class Map
     private:
         /**********mainmap*********/
 
-        LTexture map[map_num];//bigmap
+        LTexture _map[map_num];//bigmap
         mainmap icon[icon_n];//mix button and pic
         /*********menu*******/
         mainmap menu[menu_num];
         Change_scene scene[scene_num];//scrolling background
         LTexture tutor[tutor_num];
         Change_scene about[about_num];
-        Change_scene change[change_num];
+        //Change_scene change[change_num];
         music bgm[MUSIC];
+        //music sound[SOUND];
         /*********other declaration*******/
         void load();
         bool judge[12]={1,0,0,0,0,0,0,0,0,0,0,0};
         int a=1;
         int now=0;
         int check=0;//jugde which stage is complete
-        int mode=0;
+        int mode=13;
 
 
 

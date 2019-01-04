@@ -81,6 +81,7 @@ class initial
         IMG_Quit();
         SDL_Quit();
     }
+
     protected:
 
     private:
