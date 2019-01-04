@@ -4,19 +4,6 @@
 #include "definition.h"
 #include "initial.h"
 #include "Map.h"
-//#include <SDL_image.h>
-//#include <ostream>
-//#include <string>
-//#include <cmath>
-//#include <loop.h>
-//#include <LTexture.h>
-//#include <LButton.h>
-//#include <men_with_arms.h>
-//#include <base.h>
-//#include <BUTTON.h>
-//#include <mainmap.h>
-//#include <BATTLE_SCENE.h>
-
 Map m;
 initial i;//initial window and music
 int get_mode();

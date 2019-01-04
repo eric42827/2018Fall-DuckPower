@@ -24,7 +24,7 @@ const string menu_image[menu_num]={
         "image/menu/about.png",
 };
 const string scene_image[scene_num]={//menu background(scroll)
-        "image/menu/main4.png",
+        "image/menu/main41.png",
 };
 const string map_image[map_num]={
         "image/map/land.png",
