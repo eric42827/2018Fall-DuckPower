@@ -11,8 +11,9 @@
 #include "music.h"
 
 const string sound_name[SOUND]={
-        "music/click2.wav",
-        //"music/swipe.wav",
+       // "music/click2.wav",
+        //"music/wan.wav",
+        "music/nc.wav",
 };
 
 enum sound_enum{

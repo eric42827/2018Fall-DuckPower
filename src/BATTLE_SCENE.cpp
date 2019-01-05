@@ -388,7 +388,6 @@ void BATTLE_SCENE::buttons_target_show(SDL_Event& e,which_step& step,int& sel,in
                         }
                     }
                 }}
-
                 else step=SELECT_UNIT;
             }
             else{
@@ -502,8 +501,8 @@ void BATTLE_SCENE::initialize(int category){
                 case 0:
                     {
                     //soldier_character
-                     soldier_character cha[sol_num*3+1]={DUCK_ORI,NORMAL,NORMAL,NORMAL,NORMAL,NORMAL,NORMAL
-                                            ,DUCK_ORI,DUCK_ORI,DUCK_ORI,DUCK_ORI,DUCK_ORI,DUCK_ORI
+                     soldier_character cha[sol_num*3+1]={DUCK_ORI,SHOOTER,SHOOTER,FLY,FLY,HUMAN1,HUMAN1
+                                            ,DUCK_ORI,DUCK_ORI,DUCK_GREEN,DUCK_GREEN,DUCK_RED,DUCK_RED
                                             ,DUCK_ORI,DUCK_ORI,DUCK_ORI,DUCK_ORI,DUCK_ORI,DUCK_ORI};
 
                     int a[sol_num*3+1]={0,5,7,1,2,10,11,32,34,28,29,37,38,40,40,40,40,40,40};/***********/
@@ -517,8 +516,8 @@ void BATTLE_SCENE::initialize(int category){
                 case 1:
                     {
                     //soldier_character
-                     soldier_character cha[sol_num*3+1]={DUCK_ORI,HUMAN2,HUMAN2,SHOOTER,SHOOTER,HUMAN1,HUMAN1
-                                            ,DUCK_ORI,DUCK_ORI,DUCK_GREEN,DUCK_GREEN,DUCK_RED,DUCK_RED
+                     soldier_character cha[sol_num*3+1]={DUCK_ORI,SHOOTER2,SHOOTER2,FLY2,FLY2,IKE,HUMAN2
+                                            ,RED_BIRD,RED_BIRD,SWAN,BLACK_SWAN,SEAGULL,SEAGULL
                                             ,DUCK_ORI,DUCK_ORI,DUCK_ORI,DUCK_ORI,DUCK_ORI,DUCK_ORI};
 
                     int a[sol_num*3+1]={0,5,7,1,2,10,11,32,34,28,29,37,38,18,21,0,3,36,39};/***********/
@@ -532,11 +531,12 @@ void BATTLE_SCENE::initialize(int category){
                 case 2:
                     {
                     //soldier_character
-                     soldier_character cha[sol_num*3+1]={DUCK_ORI,SHOOTER,SHOOTER,SHOOTER,SHOOTER,IKE,SHOOTER
-                                            ,DUCK_GREEN,DUCK_GREEN,DUCK_BEIJING,DUCK_GREEN,DUCK_GREEN,DUCK_GREEN
+                     soldier_character cha[sol_num*3+1]={DUCK_ORI,FLY3,LEGEND,FLY3,FLY3,IKE,ROY
+                                            ,PENGUIN,PENGUIN,RUBBER_DUCK,DUCK_BEIJING,CEIBA,MOLTRES
                                             ,DUCK_ORI,DUCK_ORI,DUCK_ORI,DUCK_ORI,DUCK_ORI,DUCK_ORI};
 
-                   int a[sol_num*3+1]={0,5,7,1,2,10,11,32,34,28,29,37,38,18,21,0,3,36,39};/***********/// int a[sol_num*3+1]={0,5,7,1,2,10,11,32,34,28,29,37,38,19,20,0,15,24,39};
+
+                   int a[sol_num*3+1]={0,5,7,1,2,10,11,32,34,28,29,37,38,19,20,0,15,24,39};/***********///
                     for(int k=0;k<sol_num*3+1;k++){
                             init_pos[k]=a[k];
                             soldier_cha[k]=cha[k];

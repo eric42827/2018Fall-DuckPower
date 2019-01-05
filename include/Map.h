@@ -12,10 +12,10 @@ using namespace std;
 
 const string music_name[MUSIC]={
         "music/maple.mp3",
-        "music/village.mp3",
-        "music/battle1.mp3",
-        "music/battle2.mp3",
-        "music/battle3.mp3",
+        "music/village.wav",
+        "music/Warfare.mp3",
+        "music/sao.mp3",
+        "music/Emiya.mp3",
         "music/teacher1.mp3",
         "music/teacher2.mp3",
 };
@@ -210,7 +210,7 @@ class Map
                     scene[1].scroll(0,1,0);
                     bgm[teacher1].playmusic();
                     icon[teacher].map_but(e,mode);
-                    if(mode!=14)bgm[teacher1].stopmusic();
+                    if(mode!=14){bgm[teacher1].stopmusic();scene[1].offsety=0;}
                     SDL_RenderPresent( gRenderer );
 
 

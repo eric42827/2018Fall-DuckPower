@@ -11,6 +11,7 @@ class music
         virtual ~music();
         friend class Map;
         friend class mainmap;
+        //friend class BATTLE_SCENE;
     protected:
 
     private:
