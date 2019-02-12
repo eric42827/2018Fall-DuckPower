@@ -2,37 +2,26 @@
 #define BUTTON_H
 #include<LTexture.h>
 #include<LButton.h>
+#include<ctime>
+#include<music.h>
 
 class BUTTON
 {
     public:
         BUTTON();
         virtual ~BUTTON();
-        void load(std::string ave,std::string mouse_o){
-            average_image.loadFromFile(ave);
-            mouse_over_image.loadFromFile(mouse_o);
-        }
-        void init(int x,int y,int w,int h){
-            button.setPosition(x,y);
-            button.setdim(w,h);
-        }
-        void render(SDL_Event *e){
-            int x=button.get_x();
-            int y=button.get_y();
-            button.handleEvent(e);
-            if(button.get_sprite()==BUTTON_SPRITE_MOUSE_OVER_MOTION)mouse_over_image.render(x,y);
-            else average_image.render(x,y);
-        }
-        LButtonSprite getsprite(){
-            return button.get_sprite();
-        }
-
+        void load(std::string ave,std::string mouse_o);
+        void init(int x,int y,int w,int h);
+        void render(SDL_Event *e);
+        void handle(int &mode,int obj,int click,clock_t &start_time,music &sound);
+        LButtonSprite getsprite();
     protected:
         LButton button;
-    private:
-
         LTexture average_image;
         LTexture mouse_over_image;
+    private:
+
+
 };
 
 #endif // BUTTON_H

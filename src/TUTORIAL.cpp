@@ -1,3 +1,4 @@
+#define _GLIBCXX_USE_CXX11_ABI 0
 #include "TUTORIAL.h"
 
 TUTORIAL::TUTORIAL()
@@ -11,67 +12,75 @@ TUTORIAL::~TUTORIAL()
 }
 void TUTORIAL::initialize(){
 for(int k=0;k<TUTORIAL_PICTURE_NUM;k++)tutorial_image[k].loadFromFile(tutorial_pic_name[k]);
-previous.load("image/character/duck_ori_quack.png","image/character/duck_ori_quack.png");
-next.load("image/character/duck_green_quack.png","image/character/duck_green_quack.png");
+previous.load("image/tutorial/previous.png","image/tutorial/previous.png");
+next.load("image/tutorial/next.png","image/tutorial/next.png");
 
-previous.init(0,0,100,100);
-next.init(1000,0,100,100);
+for(int i=0;i<SOUND;i++)sound[i].loadsound(sound_name[i]);
+
+previous.init(0,320,200,80);
+next.init(1080,320,200,80);
 slide=0;
 on=0;
+click_pre=0;
 }
 void TUTORIAL::teach(SDL_Event *e){
     //render
     tutorial_image[slide].render(0,0);
 
-    if(slide!=0 and slide!=TUTORIAL_PICTURE_NUM){
+    bool click=(e->type==SDL_MOUSEBUTTONDOWN);
+    click=click-click_pre;
+
+     
+    if(slide!=0 and slide!=TUTORIAL_PICTURE_NUM-1){
         next.render(e);
         previous.render(e);
-        if(next.getsprite()==BUTTON_SPRITE_MOUSE_DOWN){
-            on=2;
-            start_time=clock();
-        }
-        else if(previous.getsprite()==BUTTON_SPRITE_MOUSE_DOWN){
-            on=1;
-            start_time=clock();
-        }
 
-        if(on==2 and clock()-start_time>200){
+        next.handle(on,2,click,start_time,sound[0]);
+        previous.handle(on,1,click,start_time,sound[0]);
+
+        if(on==2 and clock()-start_time>20){
             slide++;
+            #ifdef DEBUG
+            printf("%d",slide);
+            #endif
             on=0;
         }
-        else if(on==1 and clock()-start_time>200){
+        else if(on==1 and clock()-start_time>20){
             slide--;
+            #ifdef DEBUG
+            printf("%d",slide);
+            #endif
             on=0;
         }
     }
     else if(slide==0){
         next.render(e);
-
-        if(next.getsprite()==BUTTON_SPRITE_MOUSE_DOWN){
-            on=2;
-            start_time=clock();
-        }
-
-
-        if(on==2 and clock()-start_time>200){
+        next.handle(on,2,click,start_time,sound[0]);
+        #ifdef DEBUG
+        if(on==2)printf("%d,on= %d,clock=%d,start_time=%d\n",slide,on,clock(),start_time);
+        #endif
+        if(on==2 and clock()-start_time>20){
             slide++;
+            #ifdef DEBUG
+            printf("%d",slide);
+            #endif
             on=0;
         }
 
     }
     else if(slide==TUTORIAL_PICTURE_NUM-1){
+
         previous.render(e);
+        previous.handle(on,1,click,start_time,sound[0]);
 
-        if(next.getsprite()==BUTTON_SPRITE_MOUSE_DOWN){
-            on=1;
-            start_time=clock();
-        }
-
-
-        if(on==1 and clock()-start_time>200){
+        if(on==1 and clock()-start_time>20){
             slide--;
+            #ifdef DEBUG
+            printf("%d",slide);
+            #endif
             on=0;
         }
 
     }
+    click_pre=(e->type==SDL_MOUSEBUTTONDOWN);
 }

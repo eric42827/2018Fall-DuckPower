@@ -13,7 +13,7 @@ Change_scene::~Change_scene()
 }
 
 void Change_scene:: scroll(bool x,bool y,bool inf){
-    //std::cout<<inf;
+
     if(x){
         --offsetx;
         if(offsetx<=-getWidth()){
@@ -31,7 +31,7 @@ void Change_scene:: scroll(bool x,bool y,bool inf){
             else {++offsety;}
         }
         render(0,offsety);
-        //render(0,offsety+getHeight());
+
     }
 
 }

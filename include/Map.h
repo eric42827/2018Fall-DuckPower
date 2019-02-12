@@ -8,6 +8,7 @@
 #include <iostream>
 #include "definition.h"
 #include "music.h"
+#include<TUTORIAL.h>
 using namespace std;
 
 const string music_name[MUSIC]={
@@ -15,9 +16,13 @@ const string music_name[MUSIC]={
         "music/village.wav",
         "music/Warfare.mp3",
         "music/sao.mp3",
-        "music/Emiya.mp3",
-        "music/teacher1.mp3",
-        "music/teacher2.mp3",
+        "music/battle3.mp3",
+        "music/bar.mp3",
+        "music/teacher3.wav",
+        "music/sorrow.mp3",
+};
+const string sound_n[SOUND1]={
+        "music/teacher3.wav",
 };
 enum music_enum{
     maple=0,
@@ -25,8 +30,9 @@ enum music_enum{
     battle1=2,
     battle2=3,
     battle3=4,
-    teacher1=5,
-    teacher2=6,
+    bar=5,
+    teacher1=6,
+    sorrow=7,
 };
 
 
@@ -34,22 +40,22 @@ const string menu_image[menu_num]={
         "image/menu/story.png",
         "image/menu/tutorial.png",
         "image/menu/about.png",
+        "image/menu/conti1.png",
+        "image/menu/end.png",
 };
 const string scene_image[scene_num]={//menu background(scroll)
         "image/menu/main41.png",
-        "image/change/say1.png",
+        "image/change/say3.png",
 };
 const string map_image[map_num]={
         "image/map/land.png",
-        "image/menu/title3.png",
+        "image/menu/title4.png",
         "image/change/black.png",
         "image/change/brand1.png",
         "image/menu/version.png",
+        "image/menu/final.png",
+};
 
-};
-const string tutor_image[tutor_num]={
-        "image/map/bigmap640f.png",
-};
 const string about_image[about_num]={
         "image/menu/about3.png",
 };
@@ -82,7 +88,7 @@ enum map_name{
     black=2,
     brand=3,
     version=4,
-
+    finish=5,
 };
 enum icon_name{
     icon1=0,
@@ -104,9 +110,10 @@ enum icon_name{
 
 const int iconx[icon_n]={160,140,300,410,610,800,900,1040,1130,1025,920,610,SCREEN_WIDTH-203,0,1079};
 const int icony[icon_n]={110,220,480,390,420,450,350,300,200,100,150,165,590,0,388};
-const int menuy[3]={300,400,500};
+const int menux[menu_num]={440,440,440,994};
+const int menuy[menu_num]={300,400,500,400,500};
 const int iconm[icon_n]={2,2,2,2,2,2,2,2,2,2,2,2,1,0,1};
-const int menum[3]={14,11,12};
+const int menum[menu_num]={14,11,12,1,16};
 
 class Map
 {
@@ -121,13 +128,12 @@ class Map
         void Map_ini();
         void Map_mode(SDL_Event &e,BATTLE_SCENE **b,bool &quit){
             switch(mode){
-                //if(mode==0)menumusic.playmusic();
                 case 0:
                     bgm[maple].playmusic();
                     scene[0].scroll(1,0,1);
                     _map[title].render(340,25);
                     _map[version].render(1138,613);
-                    for(int i=0;i<menu_num;i++){
+                    for(int i=0;i<menu_num-2;i++){
                         menu[i].menu_but(e,mode);
                         if(mode){bgm[maple].stopmusic();SDL_Delay(200);break;}
                     }
@@ -164,32 +170,38 @@ class Map
                 case 2://each stage
                     bgm[(now)%3+2].playmusic();
                     b[now][0].battle(e,mode);
-                    icon[goback].map_but(e,mode);
+                    if(now>=3)icon[goback].map_but(e,mode);
                     if(mode==1){
                         check=1;
                         icon[now].clean=0;
                         now++;
                         bgm[(now)%3+2].stopmusic();
+                        SDL_Delay(200);
+                        if(now==3){
+                                mode = 15;
+                                break;
+                        }
                         if(now==12){
-                                quit = true;
+                                quit=true;
                                 break;
                         }
                     }
                     SDL_RenderPresent( gRenderer );
                     break;
                 case 11://tutorial
-                    //menumusic.playmusic();
-                    tutor[0].render(0,0);
+                    bgm[bar].playmusic();
+                    tutorial_guide->teach(&e);
                     icon[gomenu].map_but(e,mode);
+                    if(mode!=11){bgm[bar].stopmusic();SDL_Delay(200);break;}
                     SDL_RenderPresent( gRenderer );
                     break;
                 case 12://about
                     about[0].scroll(0,1,0);
                     icon[gomenu].map_but(e,mode);
-                    if(mode==0)about[0].offsety=0;
+                    if(mode==0){about[0].offsety=0;SDL_Delay(200);}
                     SDL_RenderPresent( gRenderer );
                     break;
-                case 13:
+                case 13://astart
                     for(int t=0;t<256;t++){
                         _map[black].render(0,0);
                         _map[brand].setAlpha(t);
@@ -206,13 +218,32 @@ class Map
                     }
                     mode=0;
                     break;
-                case 14:
+                case 14://
                     scene[1].scroll(0,1,0);
                     bgm[teacher1].playmusic();
                     icon[teacher].map_but(e,mode);
-                    if(mode!=14){bgm[teacher1].stopmusic();scene[1].offsety=0;}
+                    if(mode!=14){
+                        bgm[teacher1].stopmusic();
+                        SDL_Delay(200);
+                        scene[1].offsety=0;
+                    }
                     SDL_RenderPresent( gRenderer );
-
+                    break;
+                case 15:
+                    bgm[sorrow].playmusic();
+                    scene[0].scroll(1,0,1);
+                    _map[finish].render(340,25);
+                    //_map[version].render(1138,613);
+                    for(int i=3;i<menu_num;i++){
+                        menu[i].menu_but(e,mode);
+                        //if(mode==16)quit==true;
+                        if(mode!=15){bgm[sorrow].stopmusic();SDL_Delay(200);break;}
+                    }
+                    SDL_RenderPresent( gRenderer );
+                    break;
+                case 16:
+                    quit=true;
+                    break;
 
             }
             return;
@@ -230,7 +261,9 @@ class Map
         Change_scene about[about_num];
         //Change_scene change[change_num];
         music bgm[MUSIC];
-        //music sound[SOUND];
+        //music s[SOUND1];
+        TUTORIAL *tutorial_guide;
+
         /*********other declaration*******/
         void load();
         bool judge[12]={1,0,0,0,0,0,0,0,0,0,0,0};

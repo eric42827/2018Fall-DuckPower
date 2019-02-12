@@ -8,15 +8,15 @@
 #define tar_num 60
 
 /*****Map.h*****/
-#define menu_num 3
+#define menu_num 5
 #define scene_num 2
-#define map_num 5
+#define map_num 6
 #define tutor_num 1
 #define about_num 1
 #define icon_n 15
-#define MUSIC 7
-#define SOUND 1
-
+#define MUSIC 8
+#define SOUND 3
+#define SOUND1 1
 
 
 /*****BATTLE_SCENE.h*****/

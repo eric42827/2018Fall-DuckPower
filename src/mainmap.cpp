@@ -16,18 +16,14 @@ void mainmap::set_value(int x,int y,int z){
 }
 
 void mainmap::map_but(SDL_Event &a,int &mode){
-    //std::cout<<l_x<<" "<<l_y<<'\n';
     if(clean){
         handleEvent(&a);
         setPosition(l_x,l_y);
         setdim(mWidth,mHeight);
         if(get_sprite()==BUTTON_SPRITE_MOUSE_OVER_MOTION){
-            //sound[swipe].playsound();
             render(l_x,l_y);
-            //printf("correct");
         }
         else if(get_sprite()==BUTTON_SPRITE_MOUSE_DOWN){
-            //mode = k;
             sound[0].playsound();
             mode=k;
             return;
@@ -42,7 +38,6 @@ void mainmap::menu_but(SDL_Event &a,int &mode){
     setPosition(l_x,l_y);
     setdim(mWidth,mHeight);
     if(get_sprite()==BUTTON_SPRITE_MOUSE_OVER_MOTION){
-        //sound[swipe].playsound();
         setColor(255,255,100);
         render(l_x,l_y);
     }

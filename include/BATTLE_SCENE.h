@@ -14,6 +14,9 @@
 #include<men_with_arms.h>
 #include<base.h>
 #include<BUTTON.h>
+#include<BUTTON_BATTLE.h>
+#include<music.h>
+#include<GO_JUDGER.h>
 
 #include <fstream>
 #include <sstream>
@@ -85,19 +88,21 @@ class BATTLE_SCENE
 
         LTexture scene_image[image_num];
 
-        LButton next_turn_button;
+        //LButton next_turn_button;
 
+        GO_JUDGER battle_judge;
+
+        BUTTON next_turn_button;
         BUTTON *exit;
 
         men_with_arms ** soldier;
 
         base tiles[tiles_num];
 
-        loop target[tar_num];
-        loop select[sol_num+1];
+        music sound[SOUND];
 
         clock_t start_time;
-        bool clock_on;
+        int clock_on;
         bool on;
 
         bool ai_perform;
@@ -105,15 +110,20 @@ class BATTLE_SCENE
 
 
 
-        whose_turn turn;
-        which_step step;
+        int turn;
+        int step;
         bool prev_click_flag;
         bool now_click_flag;
+        const string sound_name[SOUND]={
+        "music/click2.wav",
+        "music/nc.wav",
+        "music/wan.wav"
+        };
 
         const std::string field_name[field_num]={/*****order*****/
         "image/field/field01.png",
-        "image/field/field01.png",
-        "image/field/field01.png",
+        "image/field/field02.png",
+        "image/field/field03.png",
         "image/field/field01.png",
         "image/field/field01.png",
         "image/field/field01.png",
@@ -231,22 +241,14 @@ class BATTLE_SCENE
         int distance(int pos1,int pos2,base* a);
         bool judge(int sel,int sel2,int dis,int tar,base *a);
 
-        /***Secondary Level Function***/
-        int show_target(int sel,SDL_Event* e,base *a,int n);
-        int foe_target(int sel,base *a,int n);
-        int read_target(int sel,base *a,int n,int* pre_pos);
 
-        /***Third Level Function***/
-        int soldier_view(int sel,SDL_Event *e,base *a);
-        void setMonte(base *a);
 
         /***Highest Level Function***/
         void create_battlefield();
         void set_soldiers();
 
-        void show_select(SDL_Event& e,which_step& step,int& sel,int click);
-        void buttons_target_show(SDL_Event& e,which_step& step,int& sel,int click);
-        void AI(int k);
+
+
         bool victory_judge(base* a,int sacred);
         void load();
 
@@ -254,7 +256,14 @@ class BATTLE_SCENE
         void initialize(int category);
     private:
 
+        /***Secondary Level Function***/
 
+        int foe_target(int sel,base *a,int n);
+        int read_target(int sel,base *a,int n,int* pre_pos);
+
+        /***Third Level Function***/
+        void setMonte(base *a);
+        void AI(int k);
 };
 
 #endif // BATTLE_SCENE_H

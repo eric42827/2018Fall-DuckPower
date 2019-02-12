@@ -80,10 +80,15 @@ class men_with_arms
     public:
         men_with_arms();
         virtual ~men_with_arms();
+        men_with_arms& operator+(const int &);
+        int operator-(men_with_arms *);
+
+
 
     friend class BATTLE_SCENE;
     friend class BATTLE_SCENE_SINGAL;
     friend class BATTLE_SCENE_MULTI;
+    friend class GO_JUDGER;
     protected:
 
     private:

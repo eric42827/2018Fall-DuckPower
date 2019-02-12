@@ -14,16 +14,6 @@ music::~music()
     //dtor
 }
 
-void music::loadmusic(string path){
-   Music = Mix_LoadMUS( path.c_str() );
-   if(Music==NULL)cout<<"loadmusic error: "<<path.c_str()<<"!"<<'\n';
-}
-
-void music::loadsound(string path){
-   Chunk = Mix_LoadWAV( path.c_str() );
-   if(Chunk==NULL)cout<<"loadsound error: "<<path.c_str()<<"!"<<'\n';
-}
-
 void music::playmusic(){
     if( Mix_PlayingMusic() == 0 ){Mix_PlayMusic( Music, -1 );}//-1 = inf loop ,0=1 times
     else if( Mix_PausedMusic() == 1 )

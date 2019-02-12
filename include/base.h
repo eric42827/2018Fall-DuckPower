@@ -22,8 +22,11 @@ class base
         virtual ~base();
 
         friend class BATTLE_SCENE;
+        friend class BATTLE_SCENE_MULTI;
+        friend class BUTTON_BATTLE;
         friend class men_with_arms;
         friend class loop;
+        friend class GO_JUDGER;
     protected:
 
     private:

@@ -24,6 +24,7 @@ void BATTLE_SCENE::battle(SDL_Event &e,int &mode){
 				create_battlefield();
 				//soldiers
 				set_soldiers();
+
                 //victory judge
                 if(victory_judge(tiles,sacred_right)){
                         scene_image[victory].render(SCREEN_WIDTH/2-scene_image[victory].getWidth()/2,SCREEN_HEIGHT/3-scene_image[victory].getHeight()/2);
@@ -35,17 +36,14 @@ void BATTLE_SCENE::battle(SDL_Event &e,int &mode){
                         }
                         if(exit!=NULL){
                             exit->render(&e);
-                            if(exit->getsprite()==BUTTON_SPRITE_MOUSE_DOWN and click==1){
-                                clock_on=1;
-                                start_time=clock();
-                            }
+                            exit->handle(clock_on,1,click,start_time,sound[0]);
                         }
 
                         if(clock_on==1 and clock()-start_time>=200)mode=1;
                         turn=FROZEN;
                 }
                 if(victory_judge(tiles,sacred_left)){
-                        scene_image[defeat].render(SCREEN_WIDTH/2-scene_image[victory].getWidth()/2,SCREEN_HEIGHT/3-scene_image[victory].getHeight()/2);
+                        scene_image[defeat].render(SCREEN_WIDTH/2-scene_image[defeat].getWidth()/2,SCREEN_HEIGHT/3-scene_image[defeat].getHeight()/2);
                          if(on==0){
                                 on=1;
                                 exit=new BUTTON;
@@ -54,24 +52,20 @@ void BATTLE_SCENE::battle(SDL_Event &e,int &mode){
                         }
                         if(exit!=NULL){
                             exit->render(&e);
-                            if(exit->getsprite()==BUTTON_SPRITE_MOUSE_DOWN and click==1){
-                                clock_on=1;
-                                start_time=clock();
-                            }
+                            exit->handle(clock_on,1,click,start_time,sound[0]);
                         }
 
                         if(clock_on==1 and clock()-start_time>=200)mode=1;
                         turn=FROZEN;
                 }
+
                 static bool start=0;
                 if(turn==MY){
-                    scene_image[next_turn].render(next_turn_button.get_x(),next_turn_button.get_y());
-                    next_turn_button.handleEvent( &e );
-                    if(next_turn_button.get_sprite()==BUTTON_SPRITE_MOUSE_DOWN){
-                            if(click==1){
-                            turn=FOE;
-                            }
-                    }
+                    //scene_image[next_turn].render(next_turn_button.get_x(),next_turn_button.get_y());
+                    clock_t nothing;
+                    next_turn_button.render(&e);
+                    next_turn_button.handle(turn,FOE,click,nothing,sound[0]);
+
                     if(start ==0){
                         for(int k=MY_1;k<=MY_6;k++){
                             if(soldier[k]!=NULL){
@@ -83,10 +77,11 @@ void BATTLE_SCENE::battle(SDL_Event &e,int &mode){
                     static int sel;
 
                     if(step==SELECT_UNIT){
-                        show_select(e,step,sel,click);
+                            battle_judge.show_select(tiles,soldier,e,step,sel,click,&sound[0]);
                     }
                     else if(step==SELECT_TARGET){
-                        buttons_target_show(e,step,sel,click);
+                        battle_judge.buttons_target_show(tiles,soldier,e,step,sel,click,&sound[1]);
+
                     }
                 }
                 else if(turn==FOE){
@@ -99,7 +94,7 @@ void BATTLE_SCENE::battle(SDL_Event &e,int &mode){
                             start_time=clock();
                         }
                         if(clock()-start_time>=500)ai_perform=1;
-                        scene_image[waiting].render(next_turn_button.get_x(),next_turn_button.get_y());
+                        scene_image[waiting].render(x_next,y_next);
 
                         if(num==FOE_6+1 and ai_perform==1)end_ai=1;
                         if(end_ai){
@@ -143,63 +138,7 @@ bool BATTLE_SCENE::judge(int sel,int sel2,int dis,int tar,base *a){
     return(sel2!=tar)*(sel2<tiles_num)*(sel2>=0)*(abs(a[sel2].y-a[sel].y)==dis);
 }
 /***Secondary Level Function***/
-int BATTLE_SCENE::show_target(int sel,SDL_Event* e,base *a,int n){
-            static bool flag=0;
-            static int count=0;
-            static bool check[tiles_num];
-            static int tar;
-            static int max_level;
-            static soldier_arms arms;
-            if(flag==0){
-                    tar=sel;
-                    max_level=n;
-                    for(int k=0;k<tiles_num;k++)check[k]=0;
-                    arms=soldier[a[sel].soldier_num]->get_arms();
-            }
-            if(n==0){
-                if((sel!=tar)and(sel!=sacred_left)){
-                    if((a[sel].soldier_num==none)){
-                        target[count].render(sel,e,BUTTON_SPRITE_MOUSE_OVER_MOTION,tiles,&scene_image[loop_target],&scene_image[loop_aim]);
-                        count++;
-                    }
-                }
-            }
-            else{
-                flag=1;
-                int door=((a[sel].soldier_num==none)or((a[sel].soldier_num>=MY_1)and(a[sel].soldier_num<=MY_6)));
-                if(check[sel]==0){
-                    show_target(sel,e,a, 0);check[sel]=1;}
-                    int next[6]={sel-1,sel+1,sel+y_num,sel-y_num,sel+y_num-1,sel-y_num+1};
-                    int dis[6]={y_dis,y_dis,y_dis/2,y_dis/2,y_dis/2,y_dis/2};
-                    for(int k=0;k<6;k++){
-                        if(judge(sel,next[k],dis[k],tar,tiles)and check[next[k]]==0 and door==true)show_target(next[k],e,a, n-1);
-                    }
-            }
-            int mem=0;
-            if((sel==tar)and(n==max_level)){
-                    if(arms!=air_force){
-                        for(int k=0;k<tiles_num;k++){
-                            if((a[k].soldier_num<=FOE_6)and(a[k].soldier_num>=FOE_1)and(distance(k,sel,a)<=soldier[a[sel].soldier_num]->get_firerange())){
-                                target[count].render(k,e,BUTTON_SPRITE_MOUSE_OVER_MOTION,tiles,&scene_image[loop_foe],&scene_image[loop_aim]);
-                                count++;
-                            }
-                        }
-                    }
-                    else{
-                        for( int i = FOE_1; i <=FOE_6; i ++){
-                            if(soldier[i]!=NULL){
-                                target[count].render(soldier[i]->get_pos(),e,BUTTON_SPRITE_MOUSE_OVER_MOTION,tiles,&scene_image[loop_foe],&scene_image[loop_aim]);
-                                count++;
-                            }
-                        }
-                    }
-                for(int k=0;k<tiles_num;k++)check[k]=0;
-                mem=count;
-                count=0;
-                flag=0;
-            }
-            return mem;
-        }
+
 
 int BATTLE_SCENE::foe_target(int sel,base *a,int n){
             static bool flag=0;
@@ -315,10 +254,6 @@ int BATTLE_SCENE::read_target(int sel,base *a,int n,int* pre_pos){
 
 }
 /***Third Level Function***/
-int BATTLE_SCENE::soldier_view(int sel,SDL_Event *e,base *a){
-            const int mem=show_target(sel,e,a,soldier[a[sel].soldier_num]->getpoint());
-            return mem;
-}
 void BATTLE_SCENE::setMonte(base *a){
             for(int k=0;k<tiles_num;k++){
             if(k!=sacred_left)a[k].set_Monte(sacredmonte/(degenerate_rate*distance(k,sacred_left,a)));
@@ -345,55 +280,6 @@ void BATTLE_SCENE::set_soldiers(){
             }
         }
 
-void BATTLE_SCENE::show_select(SDL_Event& e,which_step& step,int& sel,int click){
-            for( int i = MY_1; i <=MY_6; i ++)
-            {
-            if(soldier[i]!=NULL){
-                select[i].render(soldier[i]->get_pos(),& e,BUTTON_SPRITE_MOUSE_OVER_MOTION,tiles,&scene_image[none_loop],&scene_image[loop_select]);
-                if(select[i].getsprite()==BUTTON_SPRITE_MOUSE_DOWN){
-                    if(click==1){
-                        step=SELECT_TARGET;
-                        sel=soldier[i]->get_pos();
-                    }
-                }
-            }
-            }
-        }
-void BATTLE_SCENE::buttons_target_show(SDL_Event& e,which_step& step,int& sel,int click){
-            int count;
-            const int pt=soldier[tiles[sel].soldier_num]->getpoint();
-            if(pt!=0){
-                count=soldier_view(sel,&e,tiles);
-                if(count!=0){
-                for( int i = 0; i < count; i ++)
-                {
-                    if(click==1){
-                        if(target[ i ].getsprite()==BUTTON_SPRITE_MOUSE_DOWN){
-                            int num=tiles[target[ i ].get_pos()].soldier_num;
-                            if(num==none){
-                                soldier[tiles[sel].soldier_num]->set_point(soldier[tiles[sel].soldier_num]->getpoint()-distance(target[ i ].get_pos(),sel,tiles));
-                                soldier[tiles[sel].soldier_num]->go(target[ i ].get_pos(),tiles);
-                                step=SELECT_UNIT;
-                                break;
-                            }
-                            else if((num<=FOE_6)and(num>=FOE_1)){
-                                soldier[tiles[sel].soldier_num]->set_point(0);
-                                soldier[tiles[sel].soldier_num]->fight(soldier,tiles,num);
-                                step=SELECT_UNIT;
-                                break;
-                            }
-                        }
-                        else {
-                            step=SELECT_UNIT;
-                        }
-                    }
-                }}
-                else step=SELECT_UNIT;
-            }
-            else{
-                step=SELECT_UNIT;
-            }
-        }
 void BATTLE_SCENE::AI(int k){
                 if(soldier[k]!=NULL){
                     setMonte(tiles);
@@ -413,7 +299,7 @@ void BATTLE_SCENE::AI(int k){
                     if(num==none)soldier[k]->go(pos,tiles);
                     else if((num>=MY_1)and(num<=MY_6)){
                         soldier[k]->fight(soldier,tiles,num);
-
+                        sound[2].playsound();
 
                     }
                 }
@@ -443,6 +329,7 @@ void  BATTLE_SCENE::load(){
             if(k!=field)scene_image[k].loadFromFile(scene_image_name[k]);
         }
 
+
 }
 /*****Initialization****/
 void BATTLE_SCENE::initialize(int category){
@@ -454,9 +341,9 @@ void BATTLE_SCENE::initialize(int category){
             file.open("property.csv");
             std::string line;
             int a=1;
-            while (getline( file, line,'\n'))  //ÅªÀÉÅª¨ì¸õ¦æ¦r¤¸
+            while (getline( file, line,'\n'))  //Åªï¿½ï¿½Åªï¿½ï¿½ï¿½ï¿½ï¿½rï¿½ï¿½
             {
-                std::istringstream templine(line); // string Âà´«¦¨ stream
+                std::istringstream templine(line); // string ï¿½à´«ï¿½ï¿½ stream
                 std::string data;
 
                 int buffer=2;
@@ -465,7 +352,7 @@ void BATTLE_SCENE::initialize(int category){
                 }
                 for(int b=0;b<property_num;b++){
                     getline( templine, data,',');
-                    property[a][b]=atoi(data.c_str());//std::cout<<property[a][b];
+                    property[a][b]=atoi(data.c_str());
                 }
                 a++;
             }
@@ -579,9 +466,12 @@ void BATTLE_SCENE::initialize(int category){
 				}
             //buttons position and dimensions
             int l_x=x_next;int l_y=y_next;
-            next_turn_button.setPosition(l_x,l_y);
-            next_turn_button.setdim(scene_image[next_turn].getWidth(),scene_image[next_turn].getHeight());
+            next_turn_button.init(l_x,l_y,scene_image[next_turn].getWidth(),scene_image[next_turn].getHeight());
+            next_turn_button.load("image/next_turn.png","image/next_turn.png");
 
+
+
+            //turn constant
             turn=MY;
             step=SELECT_UNIT;
             prev_click_flag=0;
@@ -592,4 +482,6 @@ void BATTLE_SCENE::initialize(int category){
 
             ai_perform=1;
             end_ai=0;
-        }
+            //sound
+            for(int i=0;i<SOUND;i++){sound[i].loadsound(sound_name[i]);}
+}

@@ -90,7 +90,7 @@ void men_with_arms::render(int position,base *a){
     else rate=0;
     barclip[0].x =   0;
     barclip[0].y =   0;
-    barclip[0].w =   (bar_top_image.getWidth())*rate;//*(this->health)/(this->max_health);
+    barclip[0].w =   (bar_top_image.getWidth())*rate;;
     barclip[0].h =   bar_top_image.getHeight();
     bar_top_image.render(x,y+height,&barclip[0]);
     a[position].setsoldier_num(id);
@@ -111,34 +111,26 @@ void men_with_arms::go(int new_pos,base* a){
     const int x_l=(x_dis/2-x_adj),y_l=(y_dis/2-y_adj);
     pos=new_pos;
     x=a[pos].x+x_l;y=a[pos].y+y_l;
-    a[new_pos].setsoldier_num(id);
     a[mem].setsoldier_num(0);
+    a[new_pos].setsoldier_num(id);
+
 }
-
-
 void men_with_arms::fight(men_with_arms **foe,base *a,int foe_id){
-
-    foe[foe_id]->set_health(foe[foe_id]->get_health()-Random(strength));
+    int target=*this-foe[foe_id];
     //set animation time
     this->perform=1;
     start=clock();
-    if((this->arms==melee)or(this->arms==air_force)){
-        if(foe[foe_id]->get_health()<=0){
-            int mem=this->get_pos();
-            this->go(foe[foe_id]->get_pos(),a);
-            a[mem].setsoldier_num(0);
-            delete foe[foe_id];
-            foe[foe_id]=NULL;
 
-        }
+    if(target>=0 and target!=this->pos){
+        delete foe[foe_id];
+        foe[foe_id]=NULL;
+        this->go(target,a);
     }
-    else if(this->arms==archer){
-        if(foe[foe_id]->get_health()<=0){
-            int mem=foe[foe_id]->get_pos();
-            a[mem].setsoldier_num(0);
-            delete foe[foe_id];
-            foe[foe_id]=NULL;
-        }
+    else if(target<0){
+        delete foe[foe_id];
+        foe[foe_id]=NULL;
+        target=-(target+1);
+        a[target].setsoldier_num(0);
     }
 }
         //set combat properties
@@ -151,4 +143,25 @@ void men_with_arms::set_property(soldier_character cha,int arms_input,int health
     move_range=range_input;move_points=range_input;
     fire_range=fire_range_input;
 }
+men_with_arms& men_with_arms::operator+(const int &a){
+    this->health=this->health+a;
+    return *this;
+}
+int men_with_arms::operator-(men_with_arms *foe){
+    *foe=*foe+(-this->Random(this->strength));
+    if(foe->health<=0){
+        if((this->arms==melee)or(this->arms==air_force)){
+            int mem=foe->pos;
+
+            return mem;
+        }
+        else if(this->arms==archer){
+            int mem=-foe->pos-1;
+
+            return mem;
+        }
+    }
+    else return this->pos;
+}
+
 
